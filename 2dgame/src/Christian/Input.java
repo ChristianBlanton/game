@@ -10,7 +10,7 @@ import java.awt.event.MouseWheelListener;
 
 public class Input implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener
 {
-	private GameContainer gc;
+	private Window window;
 	
 	private final int NUM_KEYS=256;
 	private boolean[] keys=new boolean[NUM_KEYS];
@@ -23,17 +23,13 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 	private int mouseX, mouseY;
 	private int scroll;
 	
-	public Input(GameContainer gc)
+	public Input(Window window)
 	{
-	this.gc=gc;
-	mouseX=0;
-	mouseY=0;
-	scroll=0;
-	
-	gc.getWindow().getCanvas().addKeyListener(this);
-	gc.getWindow().getCanvas().addMouseMotionListener(this);
-	gc.getWindow().getCanvas().addMouseListener(this);
-	gc.getWindow().getCanvas().addMouseWheelListener(this);
+		this.window = window;
+		window.getFrame().addKeyListener(this);
+		window.getFrame().addMouseListener(this);
+		window.getFrame().addMouseMotionListener(this);
+		window.getFrame().addMouseWheelListener(this);
 	}
 	
 	public void update()
@@ -81,14 +77,19 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 	}
 
 	public void mouseDragged(MouseEvent e) {
-		mouseX=(int)(e.getX()/gc.getScale());
-		mouseY=(int)(e.getY()/gc.getScale());
+		mouseMoved(e);
 		
 	}
 
-	public void mouseMoved(MouseEvent e) {
-		mouseX=(int)(e.getX()/gc.getScale());
-		mouseY=(int)(e.getY()/gc.getScale());
+	public void mouseMoved(MouseEvent mouseEvent) {
+		int x = mouseEvent.getX();
+		mouseX = (int) (((x - window.getInsets().left) /
+				 (float)(window.getFrame().getWidth() - window.getInsets().left - window.getInsets().right)) *
+					    (window.getImage().getWidth()));
+		int y = mouseEvent.getY();
+		mouseY = (int) (((y - window.getInsets().top) /
+				 (float)(window.getFrame().getHeight() - window.getInsets().top - window.getInsets().bottom)) *
+					    (window.getImage().getHeight()));
 	}
 
 	public void mouseClicked(MouseEvent e) {

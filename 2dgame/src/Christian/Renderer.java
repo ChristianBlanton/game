@@ -25,11 +25,11 @@ public class Renderer
 
 	
     
-    public Renderer(GameContainer gc)
+    public Renderer(Window window)
     {
-        pW = gc.getWidth();
-        pH = gc.getHeight();
-        p = ((DataBufferInt)gc.getWindow().getImage().getRaster().getDataBuffer()).getData();
+        pW = window.getImage().getWidth();
+        pH = window.getImage().getHeight();
+        p = ((DataBufferInt)window.getImage().getRaster().getDataBuffer()).getData();
         zb=new int [p.length];
     }
     
@@ -168,7 +168,7 @@ public class Renderer
     }
     public void drawImageTile(ImageTile image, int offX, int offY, int tileX, int tileY)
     {
-    	if(image.isAlpha()&& !processing)
+    	if(image.isAlpha() && !processing)
     	{
     		imageRequest.add(new ImageRequest(image.getTileImage(tileX, tileY), zDepth, offX, offY));
     		return;

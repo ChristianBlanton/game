@@ -24,7 +24,7 @@ public class GameManager extends AbstractGame{
 	objects.add(new Choice(20,20, "hoss"));
 	objects.add(new Choice(300,300, "hoss"));
 	objects.add(new Choice(300,300, "hoss"));
-	image = new ImageTile("/noisesprite.png", 300, 300);
+	image = new ImageTile("/noisesprite.png", 1000, 1000);
 	player = new Image("/eltonjohn.png");
 	bg=new Image("/old.png");
 	clip = new SoundClip("/click.wav");
@@ -77,18 +77,6 @@ public class GameManager extends AbstractGame{
 	 */
 	
 		
-	}
-	
-	
-	
-	public static void main(String args[])
-	{
-	GameContainer gc = new GameContainer(new GameManager());
-	gc.setWidth(1000);
-	gc.setHeight(1000);
-	gc.setScale(1);
-	gc.start();
-	gc.getRenderer();
 	}
 
 }

@@ -2,6 +2,7 @@ package Christian;
 import java.awt.event.KeyEvent;
 
 import audio.SoundClip;
+import game.GameManager;
 
 
 
@@ -18,35 +19,32 @@ public class GameContainer implements Runnable
     private Renderer renderer;
     private Input input;
     private AbstractGame game;
+    //private PixSettings settings;
     
-    private boolean running=false;
+    private static volatile boolean running=false;
     private final double UPDATE_CAP=1.0/144.0;
     private int width=1000, height=1000;
     private float scale=1f;
   
 
-	private String title="Christian Engine v1.0";
-    
-
-
-    public GameContainer(AbstractGame game)
+    public GameContainer(Window window)
     {
-     this.game=game;
+     this.window=window;
+     game=new GameManager();
     }
 
     public void start()
     {
-        window=new Window(this);
-        renderer=new Renderer(this);
-        input= new Input(this);
+        renderer=new Renderer(window);
+        input= new Input(window);
         
         thread=new Thread(this);
         thread.run();
     }
 
-    public void stop()
+    public static void stop()
     {
-
+    running=false;
     }
 
     public void run()
@@ -60,6 +58,8 @@ public class GameContainer implements Runnable
         double frameTime=0;
         int frames=0;
         int fps=0;
+        
+        
 
         while(running)
         {
@@ -77,12 +77,6 @@ public class GameContainer implements Runnable
                 render=true;
                 
                 game.update(this, (float)UPDATE_CAP);
-                if(input.isKey(KeyEvent.VK_A))
-                {
-                	System.out.println("A");
-                
-                
-                }
                 input.update();
                 
                 if(frameTime>=1.0)
@@ -90,7 +84,7 @@ public class GameContainer implements Runnable
                     frameTime=0;
                     fps=frames;
                     frames=0;
-                   // System.out.println("FPS: " + fps);
+                  
                 }
 
             }
@@ -102,6 +96,7 @@ public class GameContainer implements Runnable
                 renderer.drawText("FPS:"+fps, 0, 0, 0xff00ffff);
                 window.update();
                 frames++;
+                
             }
             else
             {
@@ -121,6 +116,7 @@ public class GameContainer implements Runnable
 
     private void dispose()
     {
+    	window.dispose();
 
     }
     
@@ -136,11 +132,7 @@ public class GameContainer implements Runnable
         return scale;
     }
     
-    public String getTitle()
-    {
-        return title;
-    }
-    
+   
     public int getWidth()
     {
         return width;
@@ -156,10 +148,7 @@ public class GameContainer implements Runnable
         scale=input;
     }
     
-    public void setTitle(String input)
-    {
-        title=input;
-    }
+ 
     
     public void setWidth(int input)
     {
@@ -178,6 +167,10 @@ public class GameContainer implements Runnable
 	  public Renderer getRenderer() {
 			return renderer;
 		}
-    }
+	  
+}
+
+
+    
     
 
