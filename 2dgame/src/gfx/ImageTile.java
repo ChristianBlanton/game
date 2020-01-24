@@ -17,7 +17,7 @@ private int tileH;
 		{
 			for(int x=0; x<tileW; x++)
 			{
-				p[x+y*tileW]=this.getP()[(x+tileX*tileW)+(y+tileY*tileH)*this.getW()];
+				p[x+y*tileW]=this.getPixels()[(x+tileX*tileW)+(y+tileY*tileH)*this.getWidth()];
 			}
 		}
 			

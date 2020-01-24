@@ -21,9 +21,8 @@ public class GameManager extends AbstractGame{
 	
 	public GameManager()
 	{
-	objects.add(new Choice(20,20, "hoss"));
-	objects.add(new Choice(300,300, "hoss"));
-	objects.add(new Choice(300,300, "hoss"));
+	objects.add(new Choice(20,20,100,100 ,"hoss"));
+	objects.add(new Choice(400,400,200,200, "hoss2"));
 	image = new ImageTile("/noisesprite.png", 1000, 1000);
 	player = new Image("/eltonjohn.png");
 	bg=new Image("/old.png");
@@ -67,7 +66,8 @@ public class GameManager extends AbstractGame{
 			obj.render(gc, r);
 		}
 		
-		r.drawImageTile(image, 0, 0, (int)temp, 0);
+		
+		//r.drawImageTile(image, 0, 0, (int)temp, 0);
 		/*
 		r.drawImage(bg, 0, 0);
 		r.drawFillRect(32, 32, 200, 200, 0xffffccff);

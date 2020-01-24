@@ -16,25 +16,35 @@ import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+
 public class Window implements WindowListener
 {
 
 		private PixSettings settings;
-		private Frame frame;
+		private JFrame frame;
 		private BufferedImage image;
 		private BufferStrategy bufferStrategy;
 		private Graphics graphics;
 		private Insets insets;
+		private Graphics graphics2;
 
 		public Window(PixSettings settings) {
 			this.settings = settings;
 			image = new BufferedImage(settings.getWidth(), settings.getHeight(), BufferedImage.TYPE_INT_RGB);
-			frame = new Frame(settings.getTitle());
+			frame = new JFrame(settings.getTitle());
 			insets = frame.getInsets();
 			frame.setSize(0,0);
 			frame.setResizable(false);
+			frame.setState(Frame.NORMAL);
 			frame.setVisible(true);
-			
+			GraphicsEnvironment graphics2 =
+			GraphicsEnvironment.getLocalGraphicsEnvironment();
+			GraphicsDevice device = graphics2.getDefaultScreenDevice();
+			//device.setFullScreenWindow(frame);
 
 			frame.createBufferStrategy(2);
 			bufferStrategy = frame.getBufferStrategy();
@@ -79,6 +89,7 @@ public class Window implements WindowListener
 		public BufferedImage getImage() {
 			return image;
 		}
+		
 
 		public void setImage(BufferedImage image) {
 			this.image = image;

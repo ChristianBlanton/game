@@ -30,7 +30,7 @@ public class Image {
 		this.h = h;
 	}
 
-	public int getW() {
+	public int getWidth() {
 		return w;
 	}
 
@@ -38,7 +38,7 @@ public class Image {
 		this.w = w;
 	}
 
-	public int getH() {
+	public int getHeight() {
 		return h;
 	}
 
@@ -46,7 +46,7 @@ public class Image {
 		this.h = h;
 	}
 
-	public int[] getP() {
+	public int[] getPixels() {
 		return p;
 	}
 
@@ -61,5 +61,8 @@ public class Image {
 	public void setAlpha(boolean alpha) {
 		this.alpha = alpha;
 	}
+
+	
+	
 
 }

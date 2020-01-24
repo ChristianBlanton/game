@@ -16,12 +16,12 @@ private boolean hover;
 private SoundClip clip;
 private Input input;
 
-	public Choice(int posX, int posY, String text)
+	public Choice(int posX, int posY, int width, int height, String text)
 	{
 		this.posX=posX;
 		this.posY=posY;
-		this.width=800;
-		this.height=200;
+		this.width=width;
+		this.height=height;
 		this.tag="choice";
 		this.text="Love me";
 		hover=false;
@@ -46,7 +46,7 @@ private Input input;
 	public void render(GameContainer gc, Renderer r) {
 		// TODO Auto-generated method stub
 		
-		r.drawTextInBox(posX, posY, width, height, 0xffffffff, "old town road percocets molly percocets");
+		r.drawTextInBox(posX, posY, width, height, 0xffffffff, "welcome to the hotel california aaaaaaaa");
 		
 	}
 
