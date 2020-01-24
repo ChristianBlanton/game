@@ -19,13 +19,9 @@ public class GameContainer implements Runnable
     private Renderer renderer;
     private Input input;
     private AbstractGame game;
-    //private PixSettings settings;
+    private PixSettings settings;
     
     private static volatile boolean running=false;
-    private final double UPDATE_CAP=1.0/144.0;
-    private int width=1000, height=1000;
-    private float scale=1f;
-  
 
     public GameContainer(Window window)
     {
@@ -37,7 +33,7 @@ public class GameContainer implements Runnable
     {
         renderer=new Renderer(window);
         input= new Input(window);
-        
+        settings=new PixSettings();
         thread=new Thread(this);
         thread.run();
     }
@@ -71,12 +67,12 @@ public class GameContainer implements Runnable
             unprocessedTime +=passedTime;
             frameTime+=passedTime;
 
-            while(unprocessedTime>=UPDATE_CAP)
+            while(unprocessedTime>=settings.getUpdateCap())
             {
-                unprocessedTime-=UPDATE_CAP;
+                unprocessedTime-=settings.getUpdateCap();
                 render=true;
                 
-                game.update(this, (float)UPDATE_CAP);
+                game.update(this, (float)settings.getUpdateCap());
                 input.update();
                 
                 if(frameTime>=1.0)
@@ -120,40 +116,7 @@ public class GameContainer implements Runnable
 
     }
     
-    
-    
-    public int getHeight()
-    {
-        return height;
-    }
-    
-    public float getScale()
-    {
-        return scale;
-    }
-    
    
-    public int getWidth()
-    {
-        return width;
-    }
-    
-    public void setHeight(int input)
-    {
-        height=input;
-    }
-    
-    public void setScale(int input)
-    {
-        scale=input;
-    }
-    
- 
-    
-    public void setWidth(int input)
-    {
-        width=input;
-    }
     
     public Window getWindow()
     {

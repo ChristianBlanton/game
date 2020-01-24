@@ -18,8 +18,6 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 
 public class Window implements WindowListener
 {
@@ -39,8 +37,12 @@ public class Window implements WindowListener
 			insets = frame.getInsets();
 			frame.setSize(0,0);
 			frame.setResizable(false);
-			frame.setState(Frame.NORMAL);
+			//frame.setUndecorated(true);
 			frame.setVisible(true);
+			frame.setState(Frame.NORMAL);
+			//frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+			
+			
 			GraphicsEnvironment graphics2 =
 			GraphicsEnvironment.getLocalGraphicsEnvironment();
 			GraphicsDevice device = graphics2.getDefaultScreenDevice();

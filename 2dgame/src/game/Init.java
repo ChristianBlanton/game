@@ -12,9 +12,6 @@ public class Init {
 
 public static void main(String args[]) {
 	GameContainer gc = new GameContainer(window);
-	gc.setWidth(1000);
-	gc.setHeight(1000);
-	gc.setScale(1);
 	gc.start();
 	//gc.getRenderer();
 }}

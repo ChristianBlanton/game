@@ -3,6 +3,7 @@ import java.awt.image.DataBufferInt;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.concurrent.TimeUnit;
 
 import gfx.Font;
 import gfx.Image;
@@ -18,13 +19,9 @@ public class Renderer
     private int[] p;
     private int[]zb; //zbuffer 
     
-    
     private int zDepth=0;
     private boolean processing=false;
    
-
-	
-    
     public Renderer(Window window)
     {
         pW = window.getImage().getWidth();
@@ -116,7 +113,7 @@ public class Renderer
 		}
 		for (int i = 0; i < text.length(); i++) {
 			unicode = text.codePointAt(i);
-			drawImage(font.getChar(unicode), offY, offX + offset);
+			drawImage(font.getChar(unicode), offX + offset, offY);
 			offset += font.getChar(unicode).getWidth();
 		}
 	}

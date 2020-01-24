@@ -45,8 +45,8 @@ private Input input;
 	@Override
 	public void render(GameContainer gc, Renderer r) {
 		// TODO Auto-generated method stub
-		
-		r.drawTextInBox(posX, posY, width, height, 0xffffffff, "welcome to the hotel california aaaaaaaa");
+		r.draw2DString(text, posX+200, posY+200, 0);
+		r.drawTextInBox(posX, posY, width, height, 0xffffffff, text);
 		
 	}
 
