@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-=======
-/Christian/
-/game/
-/gfx/
-/gameObjects/
->>>>>>> branch 'master' of https://github.com/ChristianBlanton/game.git
-/gameFunctions/
 /audio/
+/gameFunctions/
+/gameObjects/
+/gfx/
