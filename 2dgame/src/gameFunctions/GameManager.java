@@ -1,12 +1,11 @@
-package game;
+package gameFunctions;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import Christian.AbstractGame;
-import Christian.GameContainer;
-import Christian.Renderer;
 import audio.SoundClip;
+import gameObjects.Choice;
+import gameObjects.GameObject;
 import gfx.Image;
 import gfx.ImageTile;
 
@@ -21,11 +20,13 @@ public class GameManager extends AbstractGame{
 	
 	public GameManager()
 	{
+		bg=new Image("/old.png");
 	objects.add(new Choice(20,20,100,100 ,"hoss"));
 	objects.add(new Choice(400,400,200,200, "hoss2"));
+	//objects.add(new Background(bg));
 	image = new ImageTile("/noisesprite.png", 1000, 1000);
 	player = new Image("/eltonjohn.png");
-	bg=new Image("/old.png");
+	
 	clip = new SoundClip("/click.wav");
 	clip.setVolume(-50);
 	player.setAlpha(true);

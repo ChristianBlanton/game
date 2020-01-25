@@ -1,14 +1,14 @@
-package game;
+package gameObjects;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import javax.sound.sampled.Clip;
 
-import Christian.GameContainer;
-import Christian.Input;
-import Christian.Renderer;
 import audio.SoundClip;
+import gameFunctions.GameContainer;
+import gameFunctions.Input;
+import gameFunctions.Renderer;
 
 
 public class Choice extends GameObject{
@@ -47,7 +47,7 @@ private Input input;
 		// TODO Auto-generated method stub
 		r.draw2DString(text, posX+200, posY+200, 0);
 		r.drawTextInBox(posX, posY, width, height, 0xffffffff, text);
-		
+		//r.noiseGen();
 	}
 
 }

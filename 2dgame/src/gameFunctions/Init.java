@@ -1,8 +1,4 @@
-package game;
-
-import Christian.GameContainer;
-import Christian.PixSettings;
-import Christian.Window;
+package gameFunctions;
 
 public class Init {
 

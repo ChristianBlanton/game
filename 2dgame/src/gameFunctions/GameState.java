@@ -1,4 +1,4 @@
-package Christian;
+package gameFunctions;
 
 //import game.GameManager;
 

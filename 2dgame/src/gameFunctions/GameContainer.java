@@ -1,8 +1,7 @@
-package Christian;
+package gameFunctions;
 import java.awt.event.KeyEvent;
 
 import audio.SoundClip;
-import game.GameManager;
 
 
 

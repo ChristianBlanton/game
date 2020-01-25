@@ -1,4 +1,4 @@
-package game;
+package gameObjects;
 
 
 	import java.awt.event.KeyEvent;
@@ -6,10 +6,10 @@ package game;
 
 	import javax.sound.sampled.Clip;
 
-	import Christian.GameContainer;
-	import Christian.Input;
-	import Christian.Renderer;
-	import audio.SoundClip;
+import audio.SoundClip;
+import gameFunctions.GameContainer;
+import gameFunctions.Input;
+import gameFunctions.Renderer;
 import gfx.Image;
 
 
@@ -24,6 +24,13 @@ import gfx.Image;
 			this.posX=posX;
 			this.posY=posY;
 			this.tag=text;
+			this.image=image;
+		}
+		
+		public Background(Image image)
+		{
+			posX=0;
+			posY=0;
 			this.image=image;
 		}
 		

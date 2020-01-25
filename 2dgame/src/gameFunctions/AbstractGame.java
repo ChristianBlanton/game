@@ -1,4 +1,4 @@
-package Christian;
+package gameFunctions;
 
 public abstract class AbstractGame {
 public abstract void update(GameContainer gc, float dt);

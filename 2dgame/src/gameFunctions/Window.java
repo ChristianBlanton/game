@@ -1,13 +1,6 @@
-package Christian;
+package gameFunctions;
 
 
-/**
- * Write a description of class Window here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-import Christian.PixSettings;
 import sun.misc.GC;
 
 import java.awt.*;
@@ -18,6 +11,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import gameFunctions.PixSettings;
 
 public class Window implements WindowListener
 {
@@ -56,12 +51,12 @@ public class Window implements WindowListener
 		}
 			public void update() {
 				insets = frame.getInsets();
-				if(frame.getWidth() != insets.left + insets.right + (int)(image.getWidth() * settings.getScale())) {
-					frame.setSize(insets.left + insets.right + (int)(image.getWidth() * settings.getScale()), frame.getHeight());
+				if(frame.getWidth() != insets.left + insets.right + (int)(image.getWidth() * getSettings().getScale())) {
+					frame.setSize(insets.left + insets.right + (int)(image.getWidth() * getSettings().getScale()), frame.getHeight());
 					frame.setLocationRelativeTo(null);
 				}
-				if(frame.getHeight() != insets.top + insets.bottom + (int)(image.getHeight() * settings.getScale())) {
-					frame.setSize(frame.getWidth(), insets.top + insets.bottom + (int) (image.getHeight() * settings.getScale()));
+				if(frame.getHeight() != insets.top + insets.bottom + (int)(image.getHeight() * getSettings().getScale())) {
+					frame.setSize(frame.getWidth(), insets.top + insets.bottom + (int) (image.getHeight() * getSettings().getScale()));
 					frame.setLocationRelativeTo(null);
 				}
 				do {
@@ -74,8 +69,8 @@ public class Window implements WindowListener
 						graphics = bufferStrategy.getDrawGraphics();
 						graphics.drawImage(image, insets.left,
 												  insets.top,
-								                  (int)(settings.getWidth() * settings.getScale()),
-								                  (int)(image.getHeight() * settings.getScale()),
+								                  (int)(getSettings().getWidth() * getSettings().getScale()),
+								                  (int)(image.getHeight() * getSettings().getScale()),
 								     null);
 						graphics.dispose();
 					} while (bufferStrategy.contentsRestored());
@@ -139,6 +134,9 @@ public class Window implements WindowListener
 
 		public Frame getFrame() {
 			return frame;
+		}
+		public PixSettings getSettings() {
+			return settings;
 		}
 		
 		

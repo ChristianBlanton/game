@@ -1,7 +1,7 @@
-package game;
+package gameObjects;
 
-import Christian.GameContainer;
-import Christian.Renderer;
+import gameFunctions.GameContainer;
+import gameFunctions.Renderer;
 
 public abstract class GameObject {
 	protected int posX, posY;
