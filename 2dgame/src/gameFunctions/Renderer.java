@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import com.sun.java.swing.plaf.windows.resources.windows;
 
 import gfx.Font;
 import gfx.Image;
@@ -101,7 +100,7 @@ public class Renderer {
 		int randY = 0;
 		occur = rand.nextInt(99);
 		if (occur > 95) {
-			for (int y = settings.getHeight(); y > settings.getHeight()-settings.getHeight()/8; y--) {
+			for (int y = settings.getHeight(); y > settings.getHeight() - settings.getHeight() / 8; y--) {
 				for (int x = 0; x < settings.getWidth(); x++) {
 					{
 						randY = rand.nextInt(8);
