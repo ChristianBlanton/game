@@ -16,6 +16,3 @@ public static void main(String args[]) {
 //hello
 
 //(new PixSettings("old", 320, 240, 2f, 1.0/144.0, false, true))
-//hello
-//hello anthony
-//asdf
