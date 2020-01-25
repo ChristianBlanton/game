@@ -1,6 +1,10 @@
 package gameFunctions;
 
 
+<<<<<<< HEAD
+=======
+import sun.misc.GC;
+>>>>>>> branch 'master' of https://github.com/ChristianBlanton/game.git
 
 import java.awt.*;
 import java.awt.event.WindowEvent;

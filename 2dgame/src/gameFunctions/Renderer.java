@@ -100,7 +100,11 @@ public class Renderer {
 		int randY = 0;
 		occur = rand.nextInt(99);
 		if (occur > 95) {
+<<<<<<< HEAD
 			for (int y = settings.getHeight(); y > settings.getHeight()-settings.getHeight()/8; y--) {
+=======
+			for (int y = settings.getHeight(); y > settings.getHeight() - settings.getHeight() / 8; y--) {
+>>>>>>> branch 'master' of https://github.com/ChristianBlanton/game.git
 				for (int x = 0; x < settings.getWidth(); x++) {
 					{
 						randY = rand.nextInt(8);

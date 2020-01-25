@@ -11,5 +11,9 @@ public static void main(String args[]) {
 	gc.start();
 	//gc.getRenderer();
 }}
+<<<<<<< HEAD
 //(new PixSettings("old", 320, 240, 2f, 1.0/144.0, false, true))
-//hello dudesdfas
+//hello
+=======
+//(new PixSettings("old", 320, 240, 2f, 1.0/144.0, false, true))
+>>>>>>> branch 'master' of https://github.com/ChristianBlanton/game.git
