@@ -3,12 +3,13 @@ package gameFunctions;
 public class PixSettings {
 
 	private String title = "Old Town Road";
-	private int width=600;
-	private int height=600;
+	private int width=1280;
+	private int height=720;
 	private float scale=1.0f;
 	private double updateCap=1.0/144.0; 
 	private boolean debug=true; 
 	private boolean lockFPS=false;
+	private float musicVol=0;
 
 	/*
 	 * public PixSettings(String title, int width, int height, float scale, double updateCap, boolean debug, boolean lockFPS)

@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-
 import gfx.Font;
 import gfx.Image;
 import gfx.ImageRequest;
@@ -35,7 +34,7 @@ public class Renderer {
 	public Renderer(Window window) {
 		pW = window.getImage().getWidth();
 		pH = window.getImage().getHeight();
-		settings=window.getSettings();
+		settings = window.getSettings();
 		pixels = ((DataBufferInt) window.getImage().getRaster().getDataBuffer()).getData();
 		zb = new int[pixels.length];
 		// settings=window.settings
@@ -81,12 +80,12 @@ public class Renderer {
 		int randY = 0;
 		int pixelColor;
 
-		for (int i = 0; i < settings.getHeight(); i++) {
-			for (int j = 0; j < settings.getWidth(); j++) {
+		for (int i = 0; i < pW; i++) {
+			for (int j = 0; j < pH; j++) {
 				occur = rand.nextInt(99);
 				if (occur > 20) {
-					randY = rand.nextInt(8)-rand.nextInt(8);
-					randX = rand.nextInt(8)-rand.nextInt(8);
+					randY = rand.nextInt(8) - rand.nextInt(8);
+					randX = rand.nextInt(8) - rand.nextInt(8);
 					pixelColor = pixels[i + j * pW];
 					setPixel(i + randX, j + randY, pixelColor);
 				}
@@ -102,11 +101,11 @@ public class Renderer {
 		occur = rand.nextInt(99);
 		if (occur > 95) {
 
-			for (int y = settings.getHeight(); y > settings.getHeight()-settings.getHeight()/8; y--) {
+			for (int y = settings.getHeight(); y > settings.getHeight() - settings.getHeight() / 8; y--) {
 				for (int x = 0; x < settings.getWidth(); x++) {
 					{
-						randY = rand.nextInt(8)-rand.nextInt(8);
-						randX = rand.nextInt(8)-rand.nextInt(8);
+						randY = rand.nextInt(8) - rand.nextInt(8);
+						randX = rand.nextInt(8) - rand.nextInt(8);
 						setPixel(x + randX, y + randY, Pixel.WHITE);
 					}
 				}
@@ -300,17 +299,42 @@ public class Renderer {
 
 		int offset = 0;
 		int unicode;
+		int spacePos1 = 0;
+		int spacePos2 = 0;
+		boolean first=true;
 		for (int i = 0; i < text.length(); i++) {
 			unicode = text.codePointAt(i);
-			if (offset + font.getChar(unicode).getWidth() > width) {
+			if (unicode == 32) {
+				if(first)
+				{
+					first=false;
+					spacePos1 = offset;
+				}
+				else
+				{
+					spacePos2 = offset;
+					first=true;
+				}
+			}
+
+
+			if (spacePos1 + spacePos2 + font.getChar(unicode).getWidth() > width) {
 				offset = 0;
 				offY += font.getHeight();
 			}
 			drawImage(font.getChar(unicode), offX + offset, offY);
 			offset += font.getChar(unicode).getWidth();
+			spacePos1 = 0;
+			spacePos2 = 0;
 		}
 
 		/*
+		 * if (offset + font.getChar(unicode).getWidth() > width) { offset = 0; offY +=
+		 * font.getHeight(); }
+		 * 
+		 * 
+		 * 
+		 * 
 		 * for(int y=0; y<font.getHeight(); y++) { for(int x=0;
 		 * x<font.getWidths()[unicode]; x++) {
 		 * if(font.getPixels()[(x+font.getOffsets()[unicode])+y*font.getWidths()] ==
