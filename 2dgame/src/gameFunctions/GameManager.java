@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import audio.SoundClip;
 import gameObjects.Choice;
+import gameObjects.Dvd;
 import gameObjects.GameObject;
 import gfx.Image;
 import gfx.ImageTile;
@@ -16,20 +17,18 @@ public class GameManager extends AbstractGame{
 	private ImageTile image;
 	private SoundClip clip;
 	private Image bg;
-	private Image player;
+	private ImageTile dvd;
 	
 	public GameManager()
 	{
 		bg=new Image("/old.png");
-	objects.add(new Choice(20,20,100,100 ,"hoss"));
-	objects.add(new Choice(400,400,200,200, "hoss2"));
+	//objects.add(new Choice(20,20,100,100 ,"hoss"));
+	//objects.add(new Choice(400,400,200,200, "hoss2"));
 	//objects.add(new Background(bg));
+		dvd = new ImageTile("/dvdsprites.png",100,100);
+		objects.add(new Dvd(200,200,dvd));
 	image = new ImageTile("/noisesprite.png", 1000, 1000);
-	player = new Image("/eltonjohn.png");
-	
-	clip = new SoundClip("/click.wav");
-	clip.setVolume(-50);
-	player.setAlpha(true);
+
 	}
 	public void update(GameContainer gc, float dt) {
 		for(int i=0; i<objects.size(); i++)

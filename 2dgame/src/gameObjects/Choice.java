@@ -2,6 +2,7 @@ package gameObjects;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 
 import javax.sound.sampled.Clip;
 
@@ -15,8 +16,8 @@ import gfx.Pixel;
 public class Choice extends GameObject{
 private boolean hover;
 private SoundClip clip;
-private Input input;
 private int color;
+
 
 	public Choice(int posX, int posY, int width, int height, String text)
 	{
@@ -25,9 +26,9 @@ private int color;
 		this.width=width;
 		this.height=height;
 		this.tag="choice";
-		this.text="Love me";
+		this.text="dvd";
 		hover=false;
-		color=Pixel.RED;
+		color=Pixel.MAGENTA;
 		clip=new SoundClip("/blip.wav");
 	}
 	
@@ -41,16 +42,19 @@ private int color;
 			hover=true;
 			clip.play();
 		}
+		
+		
+		
 		if(hover)
-			this.color=Pixel.GREEN;
-		else
-			color=Pixel.RED;
-	}
+		{
+			this.color=Pixel.MAGENTA+1;
+		}
+			}
 
 	@Override
 	public void render(GameContainer gc, Renderer r) {
 		// TODO Auto-generated method stub
-		r.draw2DString(text, posX+200, posY+200, 0);
+		//r.draw2DString(text, posX+200, posY+200, 0);
 		r.drawTextInBox(posX, posY, width, height, color, text);
 		//r.noiseGen();
 	}

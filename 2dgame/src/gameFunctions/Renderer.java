@@ -20,7 +20,7 @@ public class Renderer {
 	private ArrayList<ImageRequest> imageRequest = new ArrayList<ImageRequest>();
 	private Random rand = new Random();
 
-	private PixSettings settings = new PixSettings();
+	private PixSettings settings;
 	private int pW, pH;
 	private int[] pixels;
 	private int[] zb; // zbuffer
@@ -35,6 +35,7 @@ public class Renderer {
 	public Renderer(Window window) {
 		pW = window.getImage().getWidth();
 		pH = window.getImage().getHeight();
+		settings=window.getSettings();
 		pixels = ((DataBufferInt) window.getImage().getRaster().getDataBuffer()).getData();
 		zb = new int[pixels.length];
 		// settings=window.settings

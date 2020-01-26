@@ -1,5 +1,7 @@
 package gfx;
 
+import java.util.Random;
+
 public class Pixel {
 
 	public static final int WHITE = 0xFFFFFFFF;
@@ -9,8 +11,18 @@ public class Pixel {
 	public static final int YELLOW = 0xFFFFFF00;
 	public static final int MAGENTA = 0xFFFF00FF;
 	public static final int CYAN = 0xFF00FFFF;
+	public static final int[]rainbow={RED,GREEN,BLUE,YELLOW,MAGENTA,CYAN};
 
+
+	private static Random rand=new Random();
 	private static final float inv255 = 1 / 255f;
+	
+	public static int randColor()
+	{
+		int num=rand.nextInt(6);
+		return rainbow[num];
+		
+	}
 
 	public static int getColor(float a, float r, float g, float b) {
 		return (int) (a * 255f) << 24 | (int) (r * 255f) << 16 | (int) (g * 255f) << 8 | (int) (b * 255f);

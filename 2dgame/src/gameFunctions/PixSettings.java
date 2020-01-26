@@ -3,8 +3,8 @@ package gameFunctions;
 public class PixSettings {
 
 	private String title = "Old Town Road";
-	private int width=800;
-	private int height=800;
+	private int width=600;
+	private int height=600;
 	private float scale=1.0f;
 	private double updateCap=1.0/144.0; 
 	private boolean debug=true; 
