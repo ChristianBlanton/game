@@ -85,8 +85,8 @@ public class Renderer {
 			for (int j = 0; j < settings.getWidth(); j++) {
 				occur = rand.nextInt(99);
 				if (occur > 20) {
-					randY = rand.nextInt(8);
-					randX = rand.nextInt(8);
+					randY = rand.nextInt(8)-rand.nextInt(8);
+					randX = rand.nextInt(8)-rand.nextInt(8);
 					pixelColor = pixels[i + j * pW];
 					setPixel(i + randX, j + randY, pixelColor);
 				}
@@ -105,8 +105,8 @@ public class Renderer {
 			for (int y = settings.getHeight(); y > settings.getHeight()-settings.getHeight()/8; y--) {
 				for (int x = 0; x < settings.getWidth(); x++) {
 					{
-						randY = rand.nextInt(8);
-						randX = rand.nextInt(8);
+						randY = rand.nextInt(8)-rand.nextInt(8);
+						randX = rand.nextInt(8)-rand.nextInt(8);
 						setPixel(x + randX, y + randY, Pixel.WHITE);
 					}
 				}

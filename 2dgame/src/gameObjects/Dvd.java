@@ -24,6 +24,7 @@ public class Dvd extends GameObject{
 		this.height=image.getHeight();
 
 		clip=new SoundClip("/blip.wav");
+		clip.setVolume(-50);
 	}
 	public void update(GameContainer gc, float dt) {
 		if(temp>5)
@@ -65,7 +66,11 @@ public class Dvd extends GameObject{
 }
 	
 	public void render(GameContainer gc, Renderer r) {
+		if(temp>6)
+			temp=6;
 		r.drawImageTile(image, posX, posY, temp, 0);
+		//r.noiseGen();
+		//r.noiseFlicker();
 	}
 	
 

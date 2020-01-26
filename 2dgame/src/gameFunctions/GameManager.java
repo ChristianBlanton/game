@@ -25,6 +25,7 @@ public class GameManager extends AbstractGame{
 	//objects.add(new Choice(20,20,100,100 ,"hoss"));
 	//objects.add(new Choice(400,400,200,200, "hoss2"));
 	//objects.add(new Background(bg));
+	//image = new ImageTile("/noisesprite.png", 1000, 1000);
 		dvd = new ImageTile("/dvdsprites.png",100,100);
 		objects.add(new Dvd(200,200,dvd));
 	image = new ImageTile("/noisesprite.png", 1000, 1000);
