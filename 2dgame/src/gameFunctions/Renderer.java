@@ -295,7 +295,7 @@ public class Renderer {
 		if (offY >= pH)
 			return;
 
-		drawFillRect(offX, offY, width, height, 0xffcc00ff);
+		drawFillRect(offX, offY, width, height, color);
 
 		int offset = 0;
 		int unicode;
