@@ -317,15 +317,14 @@ public class Renderer {
 				}
 			}
 
-
-			if (spacePos1 + spacePos2 + font.getChar(unicode).getWidth() > width) {
+			if (offset+Math.abs(spacePos1 - spacePos2) + font.getChar(unicode).getWidth() >width){
 				offset = 0;
+				spacePos1=0;
+				spacePos2=0;
 				offY += font.getHeight();
 			}
 			drawImage(font.getChar(unicode), offX + offset, offY);
 			offset += font.getChar(unicode).getWidth();
-			spacePos1 = 0;
-			spacePos2 = 0;
 		}
 
 		/*

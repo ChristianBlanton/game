@@ -32,6 +32,7 @@ private boolean clicked;
 		setClicked(false);
 		color=Pixel.MAGENTA;
 		clip=new SoundClip("/blip.wav");
+		clip.setVolume(-50);
 	}
 	
 	@Override

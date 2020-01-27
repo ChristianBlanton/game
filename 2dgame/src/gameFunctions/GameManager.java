@@ -94,6 +94,7 @@ public class GameManager extends AbstractGame {
 			Settings.render(gc, r);
 			break;
 		}
+		r.noiseFlicker();
 
 		// r.drawImageTile(image, 0, 0, (int)temp, 0);
 		/*
@@ -101,7 +102,6 @@ public class GameManager extends AbstractGame {
 		 * r.drawImage(player, gc.getInput().getMouseX()-8,
 		 * gc.getInput().getMouseY()-8); r.drawImageTile(image,
 		 * gc.getInput().getMouseX()-8, gc.getInput().getMouseY()-8, (int)temp, 0);
-		 * r.drawRect(10, 10, 100, 100, 0xffffccff);
 		 */
 	}
 }
