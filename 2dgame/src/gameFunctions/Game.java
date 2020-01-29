@@ -60,3 +60,4 @@ public class Game extends AbstractGame {
 	public void setGoToSettings(boolean goToSettings) {
 		this.goToSettings = goToSettings;
 	}}
+//test
