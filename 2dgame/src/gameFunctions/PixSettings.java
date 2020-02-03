@@ -10,6 +10,7 @@ public class PixSettings {
 	private boolean debug=true; 
 	private boolean lockFPS=false;
 	private float musicVol=0;
+	private float sfxVol=0;
 
 	/*
 	 * public PixSettings(String title, int width, int height, float scale, double updateCap, boolean debug, boolean lockFPS)
@@ -24,7 +25,47 @@ public class PixSettings {
 		
 	}
 	 */
+	public void addMusicVol()
+	{
+		if(musicVol+5>=6)
+		{}
+		else
+		musicVol+=5;
+	}
 	
+	public void subMusicVol()
+	{
+		if(musicVol-5<-80)
+		{}
+		else
+		musicVol-=5;
+	}
+	
+	public void addSfxVol()
+	{
+		if(sfxVol+5>=6)
+		{}
+		else
+		sfxVol+=5;
+	}
+	
+	public void subSfxVol()
+	{
+		if(sfxVol-5<-80)
+		{}
+		else
+		sfxVol-=5;
+	}
+	
+	public void setMusicVol(float vol)
+	{
+		musicVol=vol;
+	}
+	
+	public float getMusicVol()
+	{
+		return musicVol;
+	}
 	
 	public boolean isDebug() {
 		return debug;
@@ -80,6 +121,14 @@ public class PixSettings {
 
 	public void setLockFPS(boolean lockFPS) {
 		this.lockFPS = lockFPS;
+	}
+
+	public float getSfxVol() {
+		return sfxVol;
+	}
+
+	public void setSfxVol(float sfVol) {
+		this.sfxVol = sfVol;
 	}
 	
 	

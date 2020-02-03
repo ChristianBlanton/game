@@ -29,6 +29,12 @@ public void setPosY(int posY) {
 public int getWidth() {
 	return width;
 }
+public String getText() {
+	return text;
+}
+public void setText(String text) {
+	this.text = text;
+}
 public void setWidth(int width) {
 	this.width = width;
 }

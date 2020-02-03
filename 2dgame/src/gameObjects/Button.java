@@ -32,26 +32,32 @@ private boolean clicked;
 		setClicked(false);
 		color=Pixel.MAGENTA;
 		clip=new SoundClip("/blip.wav");
-		clip.setVolume(-50);
+	}
+	
+	public Button()
+	{
+		hover=false;
+		setClicked(false);
+		color=Pixel.MAGENTA;
+		clip=new SoundClip("/blip.wav");
 	}
 	
 	@Override
 	public void update(GameContainer gc, float dt) {
 		// TODO Auto-generated method stub
-		hover=(gc.getInput().getMouseX()>=posX && gc.getInput().getMouseX()<=posX+width) && (gc.getInput().getMouseY()>=posY && gc.getInput().getMouseY()<=posY+height);
-		if((hover && gc.getInput().isButtonUp(MouseEvent.BUTTON1)))
-		{
+		clip.setVolume(gc.getWindow().getSettings().getSfxVol());
+		hover = (gc.getInput().getMouseX() >= posX && gc.getInput().getMouseX() <= posX + width)
+				&& (gc.getInput().getMouseY() >= posY && gc.getInput().getMouseY() <= posY + height);
+		if ((hover && gc.getInput().isButtonUp(MouseEvent.BUTTON1))) {
 			setClicked(true);
 			clip.play();
 		}
-		
-		if(hover)
-		{
-			this.color=Pixel.MAGENTA+1;
-		}
-		else
-			color=Pixel.GREEN;
-			}
+
+		if (hover) {
+			this.color = Pixel.MAGENTA + 1;
+		} else
+			color = Pixel.GREEN;
+	}
 
 	@Override
 	public void render(GameContainer gc, Renderer r) {
