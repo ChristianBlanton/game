@@ -15,8 +15,16 @@ public class Scene extends AbstractGame{
 
 	public Scene(String text, Background bg)
 	{
-		this.text=new DialogBox(text);
+		this.text=new DialogBox(text,0.15f);
 		this.bg =bg;
+		setFinished(false);
+	}
+	
+	public Scene(String text, Background bg, Sprite sprite)
+	{
+		this.text=new DialogBox(text,0.25f);
+		this.bg =bg;
+		this.sprite=sprite;
 		setFinished(false);
 	}
 	
@@ -33,6 +41,8 @@ public class Scene extends AbstractGame{
 		 */
 		bg.update(gc, dt);
 		text.update(gc, dt);
+		if(sprite!=null)
+			sprite.update(gc, dt);
 		if(text.isClicked())
 			setFinished(true);
 	}
@@ -40,8 +50,12 @@ public class Scene extends AbstractGame{
 	@Override
 	public void render(GameContainer gc, Renderer r) {
 		// TODO Auto-generated method stub
+		if(sprite!=null)
+		sprite.render(gc, r);
 		bg.render(gc, r);
 		text.render(gc, r);
+	
+		
 	}
 
 	public boolean isFinished() {

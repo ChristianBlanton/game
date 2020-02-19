@@ -144,6 +144,26 @@ public void sideNoise(int chance) {
 			}
 		}
 	}
+
+public void sideNoiseScroll() {
+	
+	int occur = 0;
+	int randX = 0;
+	int randY = 0;
+	int pixelColor;
+	
+		for (int i = 0; i < pW; i++) {
+			
+			int j = pH-(int)GameContainer.getglobTime()*2-1; {				
+					randY = rand.nextInt(1) - rand.nextInt(1);
+					randX = rand.nextInt(5);
+					
+					pixelColor = pixels[i + j * pW];
+					setPixel(i + randX, j + randY, Pixel.WHITE);
+			}
+
+		}
+}
 	
 public void noiseShad() {
 		
@@ -155,7 +175,6 @@ public void noiseShad() {
 		occur = rand.nextInt(99);
 		if (occur > -1) {
 			for (int i = 0; i < pW; i++) {
-				
 				for (int j = 0; j < pH; j++) {
 					pixelColor = pixels[i + j * pW];
 					if(pixelColor!=0x00000000)
@@ -239,6 +258,23 @@ public void noiseShad() {
 			}
 		}
 	}
+	
+	public void noiseShear() {
+		int pixelColor;
+
+		for (int i = 0; i < pW; i++) {
+			for (int j = 0; j < pH; j++) {
+					pixelColor = pixels[i + j * pW];
+					setPixel(i+3*j,j, pixelColor);
+					//setPixel(i-j, j, pixelColor);
+			}
+
+		}
+	}
+	
+
+	
+	
 
 	public void setPixel(int x, int y, int value) {
 		if (x < 0 || x >= pW || y < 0 || y >= pH)
@@ -274,6 +310,22 @@ public void noiseShad() {
 	}
 
 	public void drawText(String text, int offX, int offY, int color, int justified) {
+		int unicode;
+		int offset = 0;
+		if (justified == Font.RIGHT) {
+			offset -= font.getStringWidth(text);
+		} else if (justified == Font.CENTER) {
+			offset -= font.getStringWidth(text) / 2;
+		}
+		for (int i = 0; i < text.length(); i++) {
+			unicode = text.codePointAt(i);
+			drawImage(font.getChar(unicode), offX + offset, offY);
+			offset += font.getChar(unicode).getWidth();
+		}
+
+	}
+	
+	public void drawText(String text, int offX, int offY, int color, int justified, int speed) {
 		int unicode;
 		int offset = 0;
 		if (justified == Font.RIGHT) {
@@ -438,7 +490,7 @@ public void noiseShad() {
 		int numReturns = 0;
 		int findex = 0;
 		int sindex = 0;
-
+		
 		for (int p = 0; p < text.length(); p++) {
 			unicode2 = text.codePointAt(p);
 
@@ -472,7 +524,6 @@ public void noiseShad() {
 			}
 			offset2 += font.getChar(unicode2).getWidth();
 		}
-
 		int numReturns2 = 0;
 		for (int i = 0; i < text.length(); i++) {
 			unicode = text.codePointAt(i);
@@ -485,6 +536,7 @@ public void noiseShad() {
 			offset += font.getChar(unicode).getWidth();
 		}
 	}
+	
 
 	public int getzDepth() {
 		return zDepth;

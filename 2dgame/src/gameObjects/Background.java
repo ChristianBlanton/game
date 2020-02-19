@@ -19,11 +19,10 @@ import gfx.Image;
 	private Input input;
 	private Image image;
 	
-		public Background(int posX, int posY, String text, Image image)
+		public Background(int posX, int posY, Image image)
 		{
 			this.posX=posX;
 			this.posY=posY;
-			this.tag=text;
 			this.image=image;
 		}
 		

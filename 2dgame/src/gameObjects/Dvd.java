@@ -13,7 +13,7 @@ public class Dvd extends GameObject{
 	private Random rand=new Random();
 	private ImageTile image;
 	private int dy=1, dx=1;
-	private int temp=1;
+	private int temp=0;
 	
 	public Dvd(int posX, int posY, ImageTile image)
 	{

@@ -30,7 +30,7 @@ public class Game extends AbstractGame {
 	public Game() {
 		// load all scenes add to scene list
 		Image image = new Image("/eltonjohn.png");
-		Image bball = new Image("/bball.jpg");
+		Image bball = new Image("/city.gif");
 		Background bg = new Background(image);
 		scenes.add(new Scene(
 				"Welcome to adventure call! My name is Falcoonhoof, and I will be your guide on your quest. Greetings traveler, what is your name?",
@@ -38,7 +38,7 @@ public class Game extends AbstractGame {
 		scenes.add(new Scene(
 				"There's antimony, arsenic, aluminum, selenium, and hydrogen and hydrogren and oxygen and nitrogen and reinium and nickel, neodynium, neptunium, uranium",
 				bg));
-		scenes.add(new Scene("CREEPER, AW MAN", new Background(bball)));
+		scenes.add(new Scene("CREEPER, AW MAN", new Background(image), new Sprite(new ImageTile("/newcityspr.png", 1280, 1020),2,0.01f)));
 		scenes.add(new Scene(
 				"Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume of forgotten lore",
 				bg));
@@ -54,7 +54,7 @@ public class Game extends AbstractGame {
 			scenes.get(sceneNum).update(gc, dt);
 		}
 		
-			if (scenes.get(sceneNum).isFinished()) {
+			if (scenes.get(sceneNum).isFinished()&&sceneNum+1<scenes.size()) {
 				sceneNum++;
 				scenes.get(sceneNum).setFinished(false);
 			}
@@ -66,10 +66,14 @@ public class Game extends AbstractGame {
 		 */
 		if (gc.getInput().isKeyUp(KeyEvent.VK_ESCAPE))
 			setGoToSettings(true);
-		if (gc.getInput().isKeyUp(KeyEvent.VK_SPACE) || gc.getInput().isKeyUp(KeyEvent.VK_RIGHT))
+		if (gc.getInput().isKeyUp(KeyEvent.VK_SPACE) || gc.getInput().isKeyUp(KeyEvent.VK_RIGHT)&&(sceneNum+1)<scenes.size())
 			sceneNum++;
-		if (gc.getInput().isKeyUp(KeyEvent.VK_LEFT))
+		if (gc.getInput().isKeyUp(KeyEvent.VK_LEFT)&&sceneNum!=0)
+		{
+			scenes.get(sceneNum-1).setFinished(false);
 			sceneNum--;
+		}
+			
 	}
 
 	@Override
@@ -81,8 +85,11 @@ public class Game extends AbstractGame {
 		} else
 			scenes.get(sceneNum).render(gc, r);
 		r.sideNoise(990);
+		
+		//r.sideNoiseScroll();
 		r.noiseShad();
 		r.noiseFlicker();
+		//r.noiseShear();
 		
 
 		/*

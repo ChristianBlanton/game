@@ -74,8 +74,9 @@ public class MainMenu extends AbstractGame {
 		for (GameObject obj : objects) {
 			obj.render(gc, r);
 		}
-		r.sideNoise(990);
-		r.noiseShad();
+		//r.sideNoise(990);
+		//r.noiseShad();
+		//r.noiseShear();
 	}
 
 	public void destroy() {
