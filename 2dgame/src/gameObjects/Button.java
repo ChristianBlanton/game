@@ -88,5 +88,10 @@ protected boolean clicked;
 	public void setClicked(boolean clicked) {
 		this.clicked = clicked;
 	}
+	
+	public String getText()
+	{
+		return text;
+	}
 
 }

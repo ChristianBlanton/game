@@ -34,7 +34,7 @@ public class Renderer {
 	private boolean processing = false;
 
 	public Renderer(Window window) {
-		thread=new Thread();
+		thread = new Thread();
 		pW = window.getImage().getWidth();
 		pH = window.getImage().getHeight();
 		settings = window.getSettings();
@@ -98,127 +98,133 @@ public class Renderer {
 	}
 
 	public void sideNoise() {
-		
+
 		int occur = 0;
 		int randX = 0;
 		int randY = 0;
 		int pixelColor;
-		
+
 		occur = rand.nextInt(99);
 		if (occur > 90) {
 			for (int i = 0; i < pW; i++) {
-				
+
 				for (int j = 0; j < pH; j++) {
-					
-						randY = rand.nextInt(1) - rand.nextInt(1);
-						randX = rand.nextInt(5);
-						
-						pixelColor = pixels[i + j * pW];
-						setPixel(i + randX, j + randY, Pixel.mul(pixelColor, 2));
+
+					randY = rand.nextInt(1) - rand.nextInt(1);
+					randX = rand.nextInt(5);
+
+					pixelColor = pixels[i + j * pW];
+					setPixel(i + randX, j + randY, Pixel.mul(pixelColor, 2));
 				}
 
 			}
 		}
 	}
-	
-public void sideNoise(int chance) {
-		
+
+	public void sideNoise(int chance) {
+
 		int occur = 0;
 		int randX = 0;
 		int randY = 0;
 		int pixelColor;
-		
+
 		occur = rand.nextInt(1000);
 		if (occur > chance) {
 			for (int i = 0; i < pW; i++) {
-				
+
 				for (int j = 0; j < pH; j++) {
-					
-						randY = rand.nextInt(1) - rand.nextInt(1);
-						randX = rand.nextInt(5);
-						
-						pixelColor = pixels[i + j * pW];
-						setPixel(i + randX, j + randY, Pixel.mul(pixelColor, 2));
+
+					//randY = rand.nextInt(1) - rand.nextInt(1);
+					//randX = rand.nextInt(5);
+
+					pixelColor = pixels[i + j * pW];
+					setPixel(i + randX, j + randY, Pixel.mul(pixelColor, 2));
 				}
 
 			}
 		}
 	}
 
-public void sideNoiseScroll() {
-	
-	int occur = 0;
-	int randX = 0;
-	int randY = 0;
-	int pixelColor;
-	
-		for (int i = 0; i < pW; i++) {
-			
-			int j = pH-(int)GameContainer.getglobTime()*2-1; {				
-					randY = rand.nextInt(1) - rand.nextInt(1);
-					randX = rand.nextInt(5);
-					
-					pixelColor = pixels[i + j * pW];
-					setPixel(i + randX, j + randY, Pixel.WHITE);
-			}
+	public void sideNoiseScroll(int row) {
 
+		int randX = 0;
+		int randY = 0;
+		int pixelColor;
+
+		for (int i = 0; i < pW; i++) {
+
+			randY = rand.nextInt(5) - rand.nextInt(5);
+			randX = rand.nextInt(5);
+
+			pixelColor = pixels[i + row * pW];
+			setPixel(i+10, row+1, pixelColor);
 		}
-}
+
+	}
 	
-public void noiseShad() {
-		
+	public void sideNoiseScrollWhite(int row) {
+
+		int randX = 0;
+		int randY = 0;
+		for (int i = 0; i < pW; i++) {
+			randY = rand.nextInt(1) - rand.nextInt(1);
+			randX = rand.nextInt(5);
+			setPixel(i + randX, row + randY, Pixel.WHITE);
+		}
+
+	}
+
+
+	public void noiseShad() {
+
 		int occur = 0;
 		int randX = 0;
 		int randY = 0;
 		int pixelColor;
-		
+
 		occur = rand.nextInt(99);
 		if (occur > -1) {
 			for (int i = 0; i < pW; i++) {
 				for (int j = 0; j < pH; j++) {
 					pixelColor = pixels[i + j * pW];
-					if(pixelColor!=0x00000000)
-					{
+					if (pixelColor != 0x00000000) {
 						randY = rand.nextInt(1) - rand.nextInt(1);
 						randX = rand.nextInt(5);
-						
-						
-						//setPixel(i+5, j+5, (pixelColor & 0x8000000));
-						setPixel(i+2, j+1, Pixel.overlayColor(pixelColor, 0x800000FF));
-						setPixel(i-2, j-1, Pixel.overlayColor(pixelColor, 0x80FF0000));
+
+						// setPixel(i+5, j+5, (pixelColor & 0x8000000));
+						setPixel(i + 2, j + 1, Pixel.overlayColor(pixelColor, 0x800000FF));
+						setPixel(i - 2, j - 1, Pixel.overlayColor(pixelColor, 0x80FF0000));
 					}
-					
-						
+
 				}
 
 			}
 		}
 	}
-	
-	public void vertNoise()
-	{
+
+	public void vertNoise() {
 		int occur = 0;
 		int randX = 0;
 		int randY = 0;
 		int pixelColor;
 		int pixelColor2;
-		int delay=0;
+		int delay = 0;
 		randY = rand.nextInt(1) - rand.nextInt(1);
-		randX =1+ rand.nextInt(5);
+		randX = 1 + rand.nextInt(5);
 		occur = rand.nextInt(99);
-		//if (occur > 80) {
-			for (int i = 0; i < pW; i++) {
-				
-				for (int j = 0; j < pH; j++) {
-					
-						pixelColor = pixels[i + j * pW];
-						pixelColor2=pixels[rand.nextInt(200)];
-				}
+		// if (occur > 80) {
+		for (int i = 0; i < pW; i++) {
 
+			for (int j = 0; j < pH; j++) {
+
+				pixelColor = pixels[i + j * pW];
+				pixelColor2 = pixels[rand.nextInt(200)];
 			}
+
 		}
-	//}
-	
+	}
+	// }
+
 	public void noiseFlicker() {
 		int occur = 0;
 		int randX = 0;
@@ -238,7 +244,7 @@ public void noiseShad() {
 			}
 		}
 	}
-	
+
 	public void noiseFlicker(int chance) {
 		int occur = 0;
 		int randX = 0;
@@ -258,28 +264,35 @@ public void noiseShad() {
 			}
 		}
 	}
-	
+
 	public void noiseShear() {
 		int pixelColor;
 
 		for (int i = 0; i < pW; i++) {
 			for (int j = 0; j < pH; j++) {
-					pixelColor = pixels[i + j * pW];
-					setPixel(i+3*j,j, pixelColor);
-					//setPixel(i-j, j, pixelColor);
+				pixelColor = pixels[i + j * pW];
+				setPixel(i + 3 * j, j, pixelColor);
+				// setPixel(i-j, j, pixelColor);
 			}
 
 		}
 	}
 	
+	public void noiseShearScroll(int row) {
+		int pixelColor;
 
-	
-	
+		for (int i = 0; i < pW; i++) {
+				pixelColor = pixels[i + row * pW];
+				setPixel(i + 2 * row, row, pixelColor);
+				// setPixel(i-j, j, pixelColor);
+			}
+
+		}
 
 	public void setPixel(int x, int y, int value) {
 		if (x < 0 || x >= pW || y < 0 || y >= pH)
 			return;
-		if(pixels[x + y * pW] == value)
+		if (pixels[x + y * pW] == value)
 			return;
 
 		float alpha = Pixel.getAlpha(value) - (1f - alphaMod);
@@ -324,7 +337,7 @@ public void noiseShad() {
 		}
 
 	}
-	
+
 	public void drawText(String text, int offX, int offY, int color, int justified, int speed) {
 		int unicode;
 		int offset = 0;
@@ -490,7 +503,7 @@ public void noiseShad() {
 		int numReturns = 0;
 		int findex = 0;
 		int sindex = 0;
-		
+
 		for (int p = 0; p < text.length(); p++) {
 			unicode2 = text.codePointAt(p);
 
@@ -536,7 +549,6 @@ public void noiseShad() {
 			offset += font.getChar(unicode).getWidth();
 		}
 	}
-	
 
 	public int getzDepth() {
 		return zDepth;

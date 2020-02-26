@@ -7,6 +7,7 @@ import audio.SoundClip;
 import gameObjects.Button;
 import gameObjects.Dvd;
 import gameObjects.GameObject;
+import gameObjects.Intro;
 import gfx.Image;
 import gfx.ImageTile;
 
@@ -27,10 +28,10 @@ public class GameManager extends AbstractGame {
 	}
 
 	public static enum GameState {
-		MAINMENU, GAME, SETTINGS
+		MAINMENU, GAME, SETTINGS, INTRO
 	}
 
-	public static GameState gameState = GameState.MAINMENU;
+	public static GameState gameState = GameState.INTRO;
 
 	public static GameState getGameState() {
 		return gameState;
@@ -40,16 +41,16 @@ public class GameManager extends AbstractGame {
 		GameManager.gameState = gameState;
 	}
 
-	public static MainMenu mainMenu;
+	public static MainMenu mainMenu = new MainMenu();;
 	public static Game game = new Game();
+	public static Intro intro = new Intro("VIBES");
 	public static SettingsMenu Settings = new SettingsMenu();
 	private GameState lastGameState;
 
 	public void update(GameContainer gc, float dt) {
 		switch (gameState) {
 		case MAINMENU:
-			if (mainMenu == null)
-				mainMenu = new MainMenu();
+			
 			mainMenu.update(gc, dt);
 			if (mainMenu.isGoToPlay()) {
 				setGameState(GameState.GAME);
@@ -76,6 +77,11 @@ public class GameManager extends AbstractGame {
 				setGameState(GameState.MAINMENU);
 			}
 			break;
+		case INTRO:
+			intro.update(gc, dt);
+			if (intro.isFinished())
+				gameState=GameState.MAINMENU;
+			break;
 		}
 
 		// System.out.println(gameState);
@@ -86,6 +92,8 @@ public class GameManager extends AbstractGame {
 		//r.sideNoise();
 		//r.noiseGen();
 		switch (gameState) {
+		case INTRO:
+			intro.render(gc, r); break;
 		case MAINMENU:
 			mainMenu.render(gc, r);
 			break;

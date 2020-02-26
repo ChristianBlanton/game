@@ -6,6 +6,7 @@ import gameObjects.Background;
 import gameObjects.Button;
 import gameObjects.Dvd;
 import gameObjects.GameObject;
+import gameObjects.TextInputter;
 import gfx.Image;
 import gfx.ImageTile;
 
@@ -18,6 +19,7 @@ public class SettingsMenu extends AbstractGame {
 	private Button subSfxVol;
 	private Button addTxtSpd;
 	private Button subTxtSpd;
+	private TextInputter tI;
 	private boolean goBack = false;
 	private boolean musChange=false;
 
@@ -45,13 +47,14 @@ public class SettingsMenu extends AbstractGame {
 		subSfxVol=new Button(400, 400, 200, 100, "SFX VOL-");
 		objects.add(subSfxVol);
 		ImageTile image=new ImageTile("/dvdsprites.png",100,100);
-		objects.add(new Dvd(100, 100, image));
+		
 		addTxtSpd=new Button(800, 100, 200, 100, "Text Speed+");
 		subTxtSpd=new Button(800, 400, 200, 100, "Text Speed-");
 		objects.add(addTxtSpd);
 		objects.add(subTxtSpd);
-		
-		
+		tI=new TextInputter(500, 500, 100, 100);
+		objects.add(tI);
+		objects.add(new Dvd(100, 100, image));
 	}
 
 	@Override
@@ -123,7 +126,8 @@ public class SettingsMenu extends AbstractGame {
 			obj.render(gc, r);
 		}
 		r.sideNoise();
-		r.noiseShad();
+		//r.noiseShad();
+		//r.noiseShear();
 	}
 
 	public void destroy() {

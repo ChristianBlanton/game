@@ -9,20 +9,69 @@ import gfx.ImageTile;
 public class Scene extends AbstractGame{
 	private Image image;
 	private Sprite sprite;
-	private DialogBox text;
+	private DialogBox dialog;
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
+	}
+
+	public DialogBox getDialog() {
+		return dialog;
+	}
+
+	public void setDialog(DialogBox dialog) {
+		this.dialog = dialog;
+	}
+
+	public Background getBg() {
+		return bg;
+	}
+
+	public void setBg(Background bg) {
+		this.bg = bg;
+	}
+
 	private Background bg;
+	private TextInputter tI;
+	public TextInputter gettI() {
+		return tI;
+	}
+
+	public void settI(TextInputter tI) {
+		this.tI = tI;
+	}
+
 	private boolean finished;
 
 	public Scene(String text, Background bg)
 	{
-		this.text=new DialogBox(text,0.15f);
+		this.dialog=new DialogBox(text,0.15f);
 		this.bg =bg;
 		setFinished(false);
 	}
 	
+	public Scene(String text, Background bg, TextInputter tI)
+	{
+		this.dialog=new DialogBox(text,0.15f);
+		this.bg =bg;
+		setFinished(false);
+		this.tI=tI;
+	}
+	
 	public Scene(String text, Background bg, Sprite sprite)
 	{
-		this.text=new DialogBox(text,0.25f);
+		this.dialog=new DialogBox(text,0.25f);
 		this.bg =bg;
 		this.sprite=sprite;
 		setFinished(false);
@@ -31,19 +80,13 @@ public class Scene extends AbstractGame{
 	@Override
 	public void update(GameContainer gc, float dt) {
 		// TODO Auto-generated method stub
-		/*
-		 * for (int i = 0; i < scenes.size(); i++) {
-			scenes.get(i).update(gc, dt);
-			
-			 * if (scenes.get(i).isDead()) {
-			 * scenes.remove(i);
-				i--;
-		 */
 		bg.update(gc, dt);
-		text.update(gc, dt);
+		dialog.update(gc, dt);
 		if(sprite!=null)
 			sprite.update(gc, dt);
-		if(text.isClicked())
+		if(tI!=null)
+			tI.update(gc, dt);
+		if(dialog.isFinished())
 			setFinished(true);
 	}
 
@@ -53,7 +96,9 @@ public class Scene extends AbstractGame{
 		if(sprite!=null)
 		sprite.render(gc, r);
 		bg.render(gc, r);
-		text.render(gc, r);
+		dialog.render(gc, r);
+		if(tI!=null)
+		tI.render(gc, r);
 	
 		
 	}
