@@ -14,10 +14,10 @@ import gfx.Pixel;
 
 
 public class Button extends GameObject{
-private boolean hover;
-private SoundClip clip;
-private int color;
-private boolean clicked;
+protected boolean hover;
+protected SoundClip clip;
+protected int color;
+protected boolean clicked;
 
 
 	public Button(int posX, int posY, int width, int height, String text)
@@ -28,6 +28,20 @@ private boolean clicked;
 		this.height=height;
 		this.tag="choice";
 		this.text=text;
+		hover=false;
+		setClicked(false);
+		color=Pixel.MAGENTA;
+		clip=new SoundClip("/blip.wav");
+	}
+	
+	public Button(int posX, int posY, int width, int height)
+	{
+		this.posX=posX;
+		this.posY=posY;
+		this.width=width;
+		this.height=height;
+		this.tag="choice";
+		this.text="";
 		hover=false;
 		setClicked(false);
 		color=Pixel.MAGENTA;
@@ -73,6 +87,11 @@ private boolean clicked;
 
 	public void setClicked(boolean clicked) {
 		this.clicked = clicked;
+	}
+	
+	public String getText()
+	{
+		return text;
 	}
 
 }

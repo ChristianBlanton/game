@@ -13,7 +13,7 @@ public class Dvd extends GameObject{
 	private Random rand=new Random();
 	private ImageTile image;
 	private int dy=1, dx=1;
-	private int temp=1;
+	private int temp=0;
 	
 	public Dvd(int posX, int posY, ImageTile image)
 	{
@@ -27,7 +27,7 @@ public class Dvd extends GameObject{
 		
 	}
 	public void update(GameContainer gc, float dt) {
-	clip.setVolume(gc.getWindow().getSettings().getMusicVol());
+	clip.setVolume(gc.getWindow().getSettings().getSfxVol());
 		if(temp>5)
 			temp=0;
 	if(posY+height>gc.getWindow().getSettings().getHeight())

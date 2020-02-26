@@ -16,12 +16,15 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 	private boolean[] keys=new boolean[NUM_KEYS];
 	private boolean[] keysLast=new boolean[NUM_KEYS];
 	
+
 	private final int NUM_BUTTONS=5;
 	private boolean[] buttons=new boolean[NUM_BUTTONS];
 	private boolean[] buttonsLast=new boolean[NUM_BUTTONS];
 	
 	private int mouseX, mouseY;
 	private int scroll;
+	private int lastCharCode;
+	private char lastChar;
 	
 	public Input(Window window)
 	{
@@ -65,6 +68,19 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 	public boolean isButtonUp(int button)
 	{
 		return !buttons[button]&&buttonsLast[button];
+	}
+	
+	public boolean isAnyKeyUp()
+	{
+		boolean yes=false;
+		for(int i=0; i<NUM_KEYS; i++)
+		{
+			yes = !buttons[i]&&buttonsLast[i];
+			if(yes)
+				return true;
+		}
+		return false;
+		
 	}
 	public boolean isButtonDown(int button)
 	{
@@ -119,9 +135,20 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 
 	public void keyPressed(KeyEvent e) {
 		keys[e.getKeyCode()] = true;
-		
-		
+		lastCharCode=e.getKeyCode();
+		lastChar=e.getKeyChar();
 	}
+	
+	public int getLastCharCodePressed()
+	{
+		return lastCharCode;
+	}
+	
+	public char getLastCharPressed()
+	{
+		return lastChar;
+	}
+	
 
 	public void keyReleased(KeyEvent e) {
 		keys[e.getKeyCode()] = false;

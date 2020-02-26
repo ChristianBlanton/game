@@ -43,9 +43,6 @@ public class Pixel {
 	public static float getBlue(int color) {
 		return (color & 0xFF) * inv255;
 	}
-	public static float getBlueOpaque(int color) {
-		return (color & 0x99) * inv255;
-	}
 
 	public static int mul(int color, float multiplier) {
 		return getColor(1f,

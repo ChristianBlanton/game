@@ -20,6 +20,7 @@ public class GameContainer implements Runnable
     private AbstractGame game;
     private PixSettings settings;
     private double passedTime;
+    private static double globTime;
     
     private static volatile boolean running=false;
 
@@ -86,10 +87,13 @@ public class GameContainer implements Runnable
             }
             if(render)
             {
+            	
+            	globTime=firstTime%10;
             	renderer.clear();
                 game.render(this, renderer);
                 renderer.process();
                 renderer.drawText("FPS:"+fps, 0, 0, 0, 0xff00ffff);
+                //renderer.drawText("Time:"+globTime, 0, 100, 0, 0xff00ffff);
                 window.update();
                 frames++;
               
@@ -110,8 +114,8 @@ public class GameContainer implements Runnable
         dispose();
     }
 
-    public double getPassedTime() {
-		return passedTime;
+    public static double getglobTime() {
+		return globTime;
 	}
 
 	private void dispose()

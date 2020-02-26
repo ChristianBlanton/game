@@ -11,6 +11,7 @@ public class PixSettings {
 	private boolean lockFPS=false;
 	private float musicVol=0;
 	private float sfxVol=0;
+	private float txtSpd=0.25f;
 
 	/*
 	 * public PixSettings(String title, int width, int height, float scale, double updateCap, boolean debug, boolean lockFPS)
@@ -129,6 +130,26 @@ public class PixSettings {
 
 	public void setSfxVol(float sfVol) {
 		this.sfxVol = sfVol;
+	}
+
+	public float getTxtSpd() {
+		return txtSpd;
+	}
+
+	public void setTxtSpd(float txtSpd) {
+		this.txtSpd = txtSpd;
+	}
+	
+	public void addTxtSpd()
+	{
+		if(txtSpd+0.5<=3)
+		txtSpd+=0.5;
+	}
+	
+	public void subTxtSpd()
+	{
+		if(txtSpd-0.1>=0)
+		txtSpd-=0.1;
 	}
 	
 	

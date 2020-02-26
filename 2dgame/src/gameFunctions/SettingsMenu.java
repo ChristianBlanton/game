@@ -2,9 +2,11 @@ package gameFunctions;
 
 import java.util.ArrayList;
 
+import gameObjects.Background;
 import gameObjects.Button;
 import gameObjects.Dvd;
 import gameObjects.GameObject;
+import gameObjects.TextInputter;
 import gfx.Image;
 import gfx.ImageTile;
 
@@ -15,6 +17,9 @@ public class SettingsMenu extends AbstractGame {
 	private Button subMusVol;
 	private Button addSfxVol;
 	private Button subSfxVol;
+	private Button addTxtSpd;
+	private Button subTxtSpd;
+	private TextInputter tI;
 	private boolean goBack = false;
 	private boolean musChange=false;
 
@@ -37,13 +42,19 @@ public class SettingsMenu extends AbstractGame {
 		objects.add(addMusVol);
 		subMusVol=new Button(100, 400, 200, 100, "MUSIC VOL-");
 		objects.add(subMusVol);
-		addSfxVol=new Button(400, 100, 200, 100, "");
+		addSfxVol=new Button(400, 100, 200, 100, "SFX VOL+");
 		objects.add(addSfxVol);
 		subSfxVol=new Button(400, 400, 200, 100, "SFX VOL-");
 		objects.add(subSfxVol);
 		ImageTile image=new ImageTile("/dvdsprites.png",100,100);
-		objects.add(new Dvd(100, 100, image));
 		
+		addTxtSpd=new Button(800, 100, 200, 100, "Text Speed+");
+		subTxtSpd=new Button(800, 400, 200, 100, "Text Speed-");
+		objects.add(addTxtSpd);
+		objects.add(subTxtSpd);
+		tI=new TextInputter(500, 500, 100, 100);
+		objects.add(tI);
+		objects.add(new Dvd(100, 100, image));
 	}
 
 	@Override
@@ -75,17 +86,30 @@ public class SettingsMenu extends AbstractGame {
 			{
 				gc.getWindow().getSettings().addSfxVol();
 				addSfxVol.setClicked(false);
-				System.out.println(gc.getWindow().getSettings().getSfxVol());
-				addSfxVol.setText(addSfxVol.getText()+"JOE ");
+				//System.out.println(gc.getWindow().getSettings().getSfxVol());
+				addSfxVol.setText(addSfxVol.getText()+"+");
 			}
 			if(subSfxVol.isClicked())
 			{
 				gc.getWindow().getSettings().subSfxVol();
 				subSfxVol.setClicked(false);
-System.out.println(gc.getWindow().getSettings().getSfxVol());
+//System.out.println(gc.getWindow().getSettings().getSfxVol());
 				subSfxVol.setText(subSfxVol.getText()+"-");
 			}
 			
+			if(addTxtSpd.isClicked())
+			{
+				gc.getWindow().getSettings().addTxtSpd();
+				addTxtSpd.setClicked(false);
+				addTxtSpd.setText(addTxtSpd.getText()+"+");
+			}
+			
+			if(subTxtSpd.isClicked())
+			{
+				gc.getWindow().getSettings().subTxtSpd();
+				subTxtSpd.setClicked(false);
+				subTxtSpd.setText(subTxtSpd.getText()+"-");
+			}
 				
 			if (back.isClicked()) {
 				goBack = true;
@@ -102,7 +126,8 @@ System.out.println(gc.getWindow().getSettings().getSfxVol());
 			obj.render(gc, r);
 		}
 		r.sideNoise();
-		r.noiseShad();
+		//r.noiseShad();
+		//r.noiseShear();
 	}
 
 	public void destroy() {
