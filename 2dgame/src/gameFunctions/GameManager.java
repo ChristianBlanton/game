@@ -83,6 +83,8 @@ public class GameManager extends AbstractGame {
 	}
 
 	public void render(GameContainer gc, Renderer r) {
+		//r.sideNoise();
+		//r.noiseGen();
 		switch (gameState) {
 		case MAINMENU:
 			mainMenu.render(gc, r);
@@ -94,7 +96,7 @@ public class GameManager extends AbstractGame {
 			Settings.render(gc, r);
 			break;
 		}
-		r.noiseFlicker();
+		//r.noiseFlicker();
 
 		// r.drawImageTile(image, 0, 0, (int)temp, 0);
 		/*

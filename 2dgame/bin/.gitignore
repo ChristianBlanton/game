@@ -1,2 +1,7 @@
-/gameFunctions/
 /gameObjects/
+/gameFunctions/
+<<<<<<< HEAD
+/gameObjects/
+=======
+/gfx/
+>>>>>>> branch 'master' of https://github.com/ChristianBlanton/game.git

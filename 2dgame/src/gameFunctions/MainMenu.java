@@ -37,9 +37,9 @@ public class MainMenu extends AbstractGame {
 		objects.add(play);
 		settings = new Button(200, 500, 200, 200, "SETTINGS");
 		objects.add(settings);
-		clip = new SoundClip("/static.wav");
-		clip.setVolume(-10);
-		clip.play();
+		clip = new SoundClip("/song.wav");
+		clip.setVolume(-50);
+		//clip.loop();
 		goToPlay=false;
 		goToSettings=false;
 	}
@@ -47,6 +47,7 @@ public class MainMenu extends AbstractGame {
 	@Override
 	public void update(GameContainer gc, float dt) {
 		// TODO Auto-generated method stub
+		clip.setVolume(gc.getWindow().getSettings().getMusicVol());
 		for (int i = 0; i < objects.size(); i++) {
 			objects.get(i).update(gc, dt);
 			if (objects.get(i).isDead()) {
@@ -73,6 +74,8 @@ public class MainMenu extends AbstractGame {
 		for (GameObject obj : objects) {
 			obj.render(gc, r);
 		}
+		r.sideNoise(990);
+		r.noiseShad();
 	}
 
 	public void destroy() {

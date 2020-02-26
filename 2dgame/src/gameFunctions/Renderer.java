@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import gameObjects.Scene;
 import gfx.Font;
 import gfx.Image;
 import gfx.ImageRequest;
@@ -18,6 +19,7 @@ public class Renderer {
 	private Font font = Font.STANDARD;
 	private ArrayList<ImageRequest> imageRequest = new ArrayList<ImageRequest>();
 	private Random rand = new Random();
+	private Thread thread;
 
 	private PixSettings settings;
 	private int pW, pH;
@@ -32,6 +34,7 @@ public class Renderer {
 	private boolean processing = false;
 
 	public Renderer(Window window) {
+		thread=new Thread();
 		pW = window.getImage().getWidth();
 		pH = window.getImage().getHeight();
 		settings = window.getSettings();
@@ -94,6 +97,109 @@ public class Renderer {
 		}
 	}
 
+	public void sideNoise() {
+		
+		int occur = 0;
+		int randX = 0;
+		int randY = 0;
+		int pixelColor;
+		
+		occur = rand.nextInt(99);
+		if (occur > 90) {
+			for (int i = 0; i < pW; i++) {
+				
+				for (int j = 0; j < pH; j++) {
+					
+						randY = rand.nextInt(1) - rand.nextInt(1);
+						randX = rand.nextInt(5);
+						
+						pixelColor = pixels[i + j * pW];
+						setPixel(i + randX, j + randY, Pixel.mul(pixelColor, 2));
+				}
+
+			}
+		}
+	}
+	
+public void sideNoise(int chance) {
+		
+		int occur = 0;
+		int randX = 0;
+		int randY = 0;
+		int pixelColor;
+		
+		occur = rand.nextInt(1000);
+		if (occur > chance) {
+			for (int i = 0; i < pW; i++) {
+				
+				for (int j = 0; j < pH; j++) {
+					
+						randY = rand.nextInt(1) - rand.nextInt(1);
+						randX = rand.nextInt(5);
+						
+						pixelColor = pixels[i + j * pW];
+						setPixel(i + randX, j + randY, Pixel.mul(pixelColor, 2));
+				}
+
+			}
+		}
+	}
+	
+public void noiseShad() {
+		
+		int occur = 0;
+		int randX = 0;
+		int randY = 0;
+		int pixelColor;
+		
+		occur = rand.nextInt(99);
+		if (occur > -1) {
+			for (int i = 0; i < pW; i++) {
+				
+				for (int j = 0; j < pH; j++) {
+					pixelColor = pixels[i + j * pW];
+					if(pixelColor!=0x00000000)
+					{
+						randY = rand.nextInt(1) - rand.nextInt(1);
+						randX = rand.nextInt(5);
+						
+						
+						//setPixel(i+5, j+5, (pixelColor & 0x8000000));
+						setPixel(i+2, j+1, Pixel.overlayColor(pixelColor, 0x800000FF));
+						setPixel(i-2, j-1, Pixel.overlayColor(pixelColor, 0x80FF0000));
+					}
+					
+						
+				}
+
+			}
+		}
+	}
+	
+	public void vertNoise()
+	{
+		int occur = 0;
+		int randX = 0;
+		int randY = 0;
+		int pixelColor;
+		int pixelColor2;
+		int delay=0;
+		randY = rand.nextInt(1) - rand.nextInt(1);
+		randX =1+ rand.nextInt(5);
+		occur = rand.nextInt(99);
+		//if (occur > 80) {
+			for (int i = 0; i < pW; i++) {
+				
+				for (int j = 0; j < pH; j++) {
+					
+						pixelColor = pixels[i + j * pW];
+						pixelColor2=pixels[rand.nextInt(200)];
+				}
+
+			}
+		}
+	//}
+	
 	public void noiseFlicker() {
 		int occur = 0;
 		int randX = 0;
@@ -101,12 +207,32 @@ public class Renderer {
 		occur = rand.nextInt(99);
 		if (occur > 95) {
 
-			for (int y = settings.getHeight(); y > settings.getHeight() - settings.getHeight() / 8; y--) {
+			for (int y = settings.getHeight(); y > settings.getHeight() - settings.getHeight() / 100; y--) {
 				for (int x = 0; x < settings.getWidth(); x++) {
 					{
 						randY = rand.nextInt(8) - rand.nextInt(8);
 						randX = rand.nextInt(8) - rand.nextInt(8);
-						setPixel(x + randX, y + randY, Pixel.WHITE);
+						setPixel(x + randX, y + randY, Pixel.randColor());
+					}
+				}
+
+			}
+		}
+	}
+	
+	public void noiseFlicker(int chance) {
+		int occur = 0;
+		int randX = 0;
+		int randY = 0;
+		occur = rand.nextInt(99);
+		if (occur > chance) {
+
+			for (int y = settings.getHeight(); y > settings.getHeight() - settings.getHeight() / 100; y--) {
+				for (int x = 0; x < settings.getWidth(); x++) {
+					{
+						randY = rand.nextInt(8) - rand.nextInt(8);
+						randX = rand.nextInt(8) - rand.nextInt(8);
+						setPixel(x + randX, y + randY, Pixel.randColor());
 					}
 				}
 
@@ -116,6 +242,8 @@ public class Renderer {
 
 	public void setPixel(int x, int y, int value) {
 		if (x < 0 || x >= pW || y < 0 || y >= pH)
+			return;
+		if(pixels[x + y * pW] == value)
 			return;
 
 		float alpha = Pixel.getAlpha(value) - (1f - alphaMod);
@@ -298,51 +426,64 @@ public class Renderer {
 		drawFillRect(offX, offY, width, height, color);
 
 		int offset = 0;
+		int offset2 = 0;
 		int unicode;
+		int unicode2;
 		int spacePos1 = 0;
 		int spacePos2 = 0;
-		boolean first=true;
-		for (int i = 0; i < text.length(); i++) {
-			unicode = text.codePointAt(i);
-			if (unicode == 32) {
-				if(first)
-				{
-					first=false;
-					spacePos1 = offset;
-				}
-				else
-				{
-					spacePos2 = offset;
-					first=true;
-				}
-			}
+		boolean first = true;
+		int offY2 = offY;
 
-			if (offset+Math.abs(spacePos1 - spacePos2) + font.getChar(unicode).getWidth() >width){
-				offset = 0;
-				spacePos1=0;
-				spacePos2=0;
-				offY += font.getHeight();
+		int[] spots = new int[1000];
+		int numReturns = 0;
+		int findex = 0;
+		int sindex = 0;
+
+		for (int p = 0; p < text.length(); p++) {
+			unicode2 = text.codePointAt(p);
+
+			if (unicode2 == 32) {
+				if (first) {
+					first = false;
+					spacePos1 = offset2;
+					findex = p;
+				} else {
+					spacePos2 = offset2;
+					first = true;
+					sindex = p;
+				}
 			}
-			drawImage(font.getChar(unicode), offX + offset, offY);
-			offset += font.getChar(unicode).getWidth();
+			if ((spacePos1 > width && spacePos2 < width)) {
+				spots[numReturns] = spacePos2;
+				numReturns++;
+				spacePos1 = 0;
+				spacePos2 = 0;
+				offset2 = 0;
+				offY += font.getHeight();
+				p = sindex;
+			} else if ((spacePos2 > width && spacePos1 < width)) {
+				spots[numReturns] = spacePos1;
+				numReturns++;
+				spacePos1 = 0;
+				spacePos2 = 0;
+				offset2 = 0;
+				offY += font.getHeight();
+				p = findex;
+			}
+			offset2 += font.getChar(unicode2).getWidth();
 		}
 
-		/*
-		 * if (offset + font.getChar(unicode).getWidth() > width) { offset = 0; offY +=
-		 * font.getHeight(); }
-		 * 
-		 * 
-		 * 
-		 * 
-		 * for(int y=0; y<font.getHeight(); y++) { for(int x=0;
-		 * x<font.getWidths()[unicode]; x++) {
-		 * if(font.getPixels()[(x+font.getOffsets()[unicode])+y*font.getWidths()] ==
-		 * 0xffffffff) { if(offset+x>width) { offset=0; offY+=font.getHeight();
-		 * setPixel(x+offX+offset, y+offY, color); }
-		 * 
-		 * else setPixel(x+offX+offset, y+offY, color); } } }
-		 */
-
+		int numReturns2 = 0;
+		for (int i = 0; i < text.length(); i++) {
+			unicode = text.codePointAt(i);
+			if (offset != 0 && offset == spots[numReturns2]) {
+				offset = 0;
+				offY2 += font.getHeight();
+				numReturns2++;
+			}
+			drawImage(font.getChar(unicode), offX + offset, offY2);
+			offset += font.getChar(unicode).getWidth();
+		}
 	}
 
 	public int getzDepth() {

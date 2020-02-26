@@ -23,11 +23,11 @@ public class Dvd extends GameObject{
 		
 		this.width=image.getTileW();
 		this.height=image.getHeight();
-
 		clip=new SoundClip("/blip.wav");
-		clip.setVolume(-64);
+		
 	}
 	public void update(GameContainer gc, float dt) {
+	clip.setVolume(gc.getWindow().getSettings().getMusicVol());
 		if(temp>5)
 			temp=0;
 	if(posY+height>gc.getWindow().getSettings().getHeight())
