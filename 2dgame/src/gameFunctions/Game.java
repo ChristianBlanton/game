@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import gameObjects.Background;
 import gameObjects.Button;
+import gameObjects.ButtonGroup;
+import gameObjects.ChoiceScene;
 import gameObjects.Dvd;
 import gameObjects.GameObject;
 import gameObjects.Scene;
@@ -38,12 +40,16 @@ private String []sceneText;
 		sceneText=TextLoader.load("/scenetxt.txt").split("///");
 		
 		Background bg = new Background(image);
-		TextInputter tI = new TextInputter(400, 400, 200, 100);
+		TextInputter tI = new TextInputter(400, 400, 200, 100, 10);
 		//todo refactor
+		ChoiceScene cS1=new ChoiceScene(sceneText[0], bg, new ButtonGroup("go scene 2","go scene 3", "go scene 4"),  2, 3,4);
 		scenes.add(new Scene(sceneText[0],bg, tI));
+		scenes.add(cS1);
 		scenes.add(new Scene(sceneText[1],bg));
 		scenes.add(new Scene(sceneText[2], new Background(image), new Sprite(new ImageTile("/newcityspr.png", 1280, 1020),2,0.01f)));
-		scenes.add(new Scene(sceneText[2],bg));
+		scenes.add(new Scene(sceneText[3],bg));
+        //scenes.add(new ChoiceScene(sceneText[0], bg, new ButtonGroup("joe","blow", "foe")));
+
 
 	}
 
@@ -63,10 +69,21 @@ private String []sceneText;
 			scenes.get(sceneNum).update(gc, dt);
 			if(name!=null)
 			scenes.get(sceneNum).getDialog().replaceName(name);
-			
 		}
 
-		if (scenes.get(sceneNum).isFinished() && sceneNum + 1 < scenes.size()) {
+		if(scenes.get(sceneNum) instanceof ChoiceScene)
+		{
+			
+			if (scenes.get(sceneNum).isFinished())
+			{
+				
+				sceneNum=((ChoiceScene) scenes.get(sceneNum)).getChosenScene();
+				System.out.println(sceneNum);
+			}
+					
+		}
+			
+		else if (scenes.get(sceneNum).isFinished() && sceneNum + 1 < scenes.size()) {
 			sceneNum++;
 			scenes.get(sceneNum).setFinished(false);
 		}

@@ -1,5 +1,7 @@
+
+#Scene 1#
 Falconhoof: Welcome to Adventure Call! Greetings Traveler! My name is Falconhoof, and I will be your guide on your quest.
-/// /name, nice name.
+////name, nice name.
 _  
 Its wings are too small to get its fat little body off the ground. 
 _ 
@@ -8,9 +10,64 @@ _
 Yellow, black. Yellow, black. Yellow, black. Yellow, black. Ooh, black and yellow! Let's shake it up a little.
 _
 /name! Breakfast is ready! Coming! Hang on a second.
+#Scene 2#
 ///
 /name:Old town road_ and gold brown toad
 ///
-AI AI AI I'm your little butterfly_Green black and blue make the colors in the sky_ AI AI AI AIA AI AI 
-
+Nice, one. You got the whole crew laughing._
+Start the rescue_
+Lower the stretcher_
+How bout another joke, murray?_Murray: No, I think we've had quite enough of your jokes
+_Joker: What do you get, when you cross a mentally-ill loner, with a society that treats him like trash?_
+I'll tell you what you get, you get what you hyucking deserve!_he shoots him
+///
+CLOSE ON ARTHUR (30's), tears in his eyes from laughing so
+hard. He's trying to get it under control. His greasy, black
+hair hanging down over his forehead. He's wearing an old,
+faded green cardigan sweater, a threadbare gray scarf, thin
+from years of use, hangs loosely around his neck._
+He's sitting across from an overworked SOCIAL WORKER (50's),
+African American. Her office is cramped and run-down in a
+cramped and run-down building. Stacks of folders piled high
+in front of her._
+She just sits behind her desk, waiting for his laughing fit
+to end, she's been through this before. Finally it subsides.
+Arthur takes a deep breath, pauses to see if it's over.
+Beat._
+ARTHUR
+--is it just me, or is it getting
+crazier out there?
+Despite the laughter, there's real pain in his eyes.
+Something broken in him. Looks like he hasn't slept in days._
+SOCIAL WORKER
+It's certainly tense. People are
+upset, they're struggling. Looking
+for work. The garbage strike seems
+like it's been going on forever.
+These are tough times.
+(then)
+How 'bout you. Have you been
+keeping up with your journal?_
+ARTHUR
+Everyday._
+SOCIAL WORKER
+Great. Did you bring it with you?
+Beat._
+ARTHUR
+(dodging the subject)
+I'm sorry. Did I bring what?_
+SOCIAL WORKER
+(impatient; she doesn't
+have time for this)
+Arthur, last time I asked you to
+bring your journal with you. For
+these appointments. Do you have it?_
+ARTHUR
+Yes ma'am.
+Beat._
+SOCIAL WORKER
+Can I see it?
+He reluctantly reaches into the pocket of his jacket hanging
+on the chair behind him. Pulls out a weathered notebook.
+Slides it across to her--
 
