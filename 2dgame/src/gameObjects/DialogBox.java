@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import gameFunctions.GameContainer;
 import gameFunctions.PixSettings;
 import gameFunctions.Renderer;
+import gameFunctions.TextLoader;
 import gfx.Pixel;
 
 
@@ -18,7 +19,7 @@ public class DialogBox extends Button{
 	private int numTexts;
 	private int currText;
 	private boolean finished; //if entire dialog box is done
-	private String endAnim="";
+	private String endAnim=" ";
 	private float cdTime=1.0f;
 	public boolean isFinished() {
 		return finished;
@@ -32,12 +33,28 @@ public class DialogBox extends Button{
 	{
 		super(0,-(p.getHeight()/6-p.getHeight()), p.getWidth(), p.getHeight());
 		this.speed=speed;
-		
-		this.text="";
+		String temp="";
+		boolean hide = false;
+		//allows for comments in text file using start with # and end with #
+		/*
+		 * 
+		 */
+		//increases load time significantly
+		for(int i=0; i<text.length(); i++)
+		{
+			if (!hide&&text.charAt(i)!='#')
+				temp+=text.charAt(i);
+			if(text.charAt(i)=='#' && !hide)
+				hide=true;
+			else if(TextLoader.load("/scenetxt.txt").charAt(i)=='#' && hide)
+			{
+				hide=false; 
+			}
+		}
+		text=temp;
+		//this.text=text;
 		count=0;
-		animText=text;
-		tempTexts=animText.split("_");
-		
+		tempTexts=text.split("_");
 		numTexts=tempTexts.length-1;
 		currText=0;
 	}
@@ -60,8 +77,6 @@ public class DialogBox extends Button{
 		// TODO Auto-generated method stub
 		if(cdTime>0)
 		cdTime-=1;
-		for(String str: tempTexts)
-			//System.out.println(str);
 		speed=gc.getWindow().getSettings().getTxtSpd();
 		clip.setVolume(gc.getWindow().getSettings().getSfxVol());
 		
@@ -98,16 +113,16 @@ public class DialogBox extends Button{
 		//animate arrows if done counting
 		if(count>=currLen)
 		{	
+			
 				 if((cdTime)<=0) //if cdTime has passed, animate the arrow at next spot
 				{
-					 if((endAnim.length()<3))
-					 {
-						 endAnim+=" ";
-						cdTime=50f;
-						text=tempTexts[currText].substring(0,(int)count)+" "+endAnim+">";
-					 }
-					 else					
-					endAnim="";
+					 
+					 if((endAnim.length()<4))
+						 endAnim+=">";
+					 else
+							 endAnim=" >";
+					 cdTime=50f;
+					
 				}
 		}
 		else if(count<currLen)
@@ -115,7 +130,6 @@ public class DialogBox extends Button{
 			if((count+speed)>currLen)
 			speed=1;
 			count+=speed;
-			//System.out.println("Count " + count+"CurrLen" + currLen);
 			text=""+tempTexts[currText].substring(0,(int)count);
 			
 		}
@@ -126,7 +140,13 @@ public class DialogBox extends Button{
 	
 	}
 	
-	
+	public void render(GameContainer gc, Renderer r) {
+		// TODO Auto-generated method stub
+		//r.draw2DString(text, posX+200, posY+200, 0);
+		//System.out.println(endAnim);
+		r.drawTextInBox(posX, posY, width, height, color, (int)count+endAnim.length(), tempTexts[currText]+endAnim);
+		//r.noiseGen();
+	}
 	
 	
 

@@ -23,7 +23,6 @@ public class Sprite extends GameObject{
 	
 	public void update(GameContainer gc, float dt) {
 				temp+=speed;
-		
 }
 	
 	public void render(GameContainer gc, Renderer r) {
@@ -35,7 +34,7 @@ public class Sprite extends GameObject{
 			
 		r.drawImageTile(image, posX, posY, (int)temp, 0);
 		//r.drawRect(posX, posY, width, height, Pixel.randColor());
-		r.noiseGen();
+		//r.noiseGen();
 		//r.noiseFlicker();
 	}
 }

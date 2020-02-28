@@ -48,12 +48,13 @@ protected boolean clicked;
 		clip=new SoundClip("/blip.wav");
 	}
 	
-	public Button()
+	public Button(String text)
 	{
 		hover=false;
 		setClicked(false);
 		color=Pixel.MAGENTA;
 		clip=new SoundClip("/blip.wav");
+		
 	}
 	
 	@Override

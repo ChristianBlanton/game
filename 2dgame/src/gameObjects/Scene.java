@@ -8,8 +8,8 @@ import gfx.ImageTile;
 
 public class Scene extends AbstractGame{
 	private Image image;
-	private Sprite sprite;
-	private DialogBox dialog;
+	protected Sprite sprite;
+	protected DialogBox dialog;
 	public Image getImage() {
 		return image;
 	}
@@ -42,8 +42,8 @@ public class Scene extends AbstractGame{
 		this.bg = bg;
 	}
 
-	private Background bg;
-	private TextInputter tI;
+	protected Background bg;
+	protected TextInputter tI;
 	public TextInputter gettI() {
 		return tI;
 	}
@@ -52,7 +52,7 @@ public class Scene extends AbstractGame{
 		this.tI = tI;
 	}
 
-	private boolean finished;
+	protected boolean finished;
 
 	public Scene(String text, Background bg)
 	{
