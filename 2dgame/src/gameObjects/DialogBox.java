@@ -37,10 +37,7 @@ public class DialogBox extends Button{
 		boolean hide = false;
 		//allows for comments in text file using start with # and end with #
 		/*
-		 * 
-		 */
-		//increases load time significantly
-		for(int i=0; i<text.length(); i++)
+		 * 	for(int i=0; i<text.length(); i++)
 		{
 			if (!hide&&text.charAt(i)!='#')
 				temp+=text.charAt(i);
@@ -52,6 +49,9 @@ public class DialogBox extends Button{
 			}
 		}
 		text=temp;
+		 */
+		//increases load time significantly
+	
 		//this.text=text;
 		count=0;
 		tempTexts=text.split("_");
@@ -84,9 +84,9 @@ public class DialogBox extends Button{
 				&& (gc.getInput().getMouseY() >= posY && gc.getInput().getMouseY() <= posY + height);
 		
 		if (hover) {
-			this.color = Pixel.RED;
+			this.color1 = Pixel.RED;
 		} else
-			color = Pixel.GREEN;
+			color1 = Pixel.GREEN;
 		
 		currLen=tempTexts[currText].length();
 		
@@ -113,7 +113,6 @@ public class DialogBox extends Button{
 		//animate arrows if done counting
 		if(count>=currLen)
 		{	
-			
 				 if((cdTime)<=0) //if cdTime has passed, animate the arrow at next spot
 				{
 					 
@@ -122,7 +121,6 @@ public class DialogBox extends Button{
 					 else
 							 endAnim=" >";
 					 cdTime=50f;
-					
 				}
 		}
 		else if(count<currLen)
@@ -133,18 +131,13 @@ public class DialogBox extends Button{
 			text=""+tempTexts[currText].substring(0,(int)count);
 			
 		}
-		
-		
-		
-	
-	
 	}
 	
 	public void render(GameContainer gc, Renderer r) {
 		// TODO Auto-generated method stub
 		//r.draw2DString(text, posX+200, posY+200, 0);
 		//System.out.println(endAnim);
-		r.drawTextInBox(posX, posY, width, height, color, (int)count+endAnim.length(), tempTexts[currText]+endAnim);
+		r.drawTextInBox(posX, posY, width, height, color1, (int)count+endAnim.length(), tempTexts[currText]+endAnim);
 		//r.noiseGen();
 	}
 	

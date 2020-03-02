@@ -32,7 +32,7 @@ private String []sceneText;
 	 * 
 	 */
 
-	public Game() {
+	public Game(Window window) {
 		// load all scenes add to scene list
 		Image image = new Image("/eltonjohn.png");
 		Image bball = new Image("/city.gif");
@@ -40,14 +40,19 @@ private String []sceneText;
 		sceneText=TextLoader.load("/scenetxt.txt").split("///");
 		
 		Background bg = new Background(image);
-		TextInputter tI = new TextInputter(400, 400, 200, 100, 10);
+		TextInputter tI = new TextInputter(window.getSettings().getWidth()/2-130, window.getSettings().getHeight()/2, 260, 50, 10);
 		//todo refactor
-		ChoiceScene cS1=new ChoiceScene(sceneText[0], bg, new ButtonGroup("go scene 2","go scene 3", "go scene 4"),  2, 3,4);
+		ChoiceScene cS1=new ChoiceScene(sceneText[1], bg, new ButtonGroup("go north","go south", "go quit"),2,5,999);
+		ChoiceScene cS2=new ChoiceScene(sceneText[2], bg, new ButtonGroup("get key","get troll", "go quit"),4,3,999);
 		scenes.add(new Scene(sceneText[0],bg, tI));
 		scenes.add(cS1);
-		scenes.add(new Scene(sceneText[1],bg));
-		scenes.add(new Scene(sceneText[2], new Background(image), new Sprite(new ImageTile("/newcityspr.png", 1280, 1020),2,0.01f)));
-		scenes.add(new Scene(sceneText[3],bg));
+		scenes.add(cS2);
+		scenes.add(new Scene(sceneText[3], bg));
+		scenes.add(new Scene(sceneText[4], bg));
+		scenes.add(new Scene(sceneText[5], bg));
+		//scenes.add(new Scene(sceneText[3], bg));
+		
+		//scenes.add(new Scene(sceneText[2], new Background(image), new Sprite(new ImageTile("/newcityspr.png", 1280, 1020),2,0.01f)));
         //scenes.add(new ChoiceScene(sceneText[0], bg, new ButtonGroup("joe","blow", "foe")));
 
 
@@ -101,7 +106,6 @@ private String []sceneText;
 			scenes.get(sceneNum - 1).setFinished(false);
 			sceneNum--;
 		}
-
 	}
 
 	@Override
@@ -112,14 +116,15 @@ private String []sceneText;
 
 		} else
 			scenes.get(sceneNum).render(gc, r);
-		// r.sideNoise(990);
+		r.sideNoise(980, (int)row);
 		r.sideNoiseScroll((int) row);
 		// r.sideNoiseScroll((int)row+1);
 		// r.noiseShearScroll((int)row);
 		// r.sideNoise();
-		// r.noiseShad();
+		r.noiseShad();
+		
 		// r.sideNoiseScrollWhite((int)row);
-		// r.noiseFlicker();
+		//r.noiseFlicker();
 		// r.noiseShear();
 
 		/*
@@ -134,6 +139,14 @@ private String []sceneText;
 
 	public void setGoToSettings(boolean goToSettings) {
 		this.goToSettings = goToSettings;
+	}
+
+	public int getSceneNum() {
+		return sceneNum;
+	}
+
+	public void setSceneNum(int sceneNum) {
+		this.sceneNum = sceneNum;
 	}
 }
 //test

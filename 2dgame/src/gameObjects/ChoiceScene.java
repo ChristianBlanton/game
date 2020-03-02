@@ -1,5 +1,7 @@
 package gameObjects;
 
+import java.awt.event.MouseEvent;
+
 import gameFunctions.GameContainer;
 import gameFunctions.Renderer;
 
@@ -51,7 +53,12 @@ public void setChoiceTwoScene(int choiceTwoScene) {
 	@Override
 	public void update(GameContainer gc, float dt) {
 		// TODO Auto-generated method stub
-		super.update(gc, dt);
+		bg.update(gc, dt);
+		dialog.update(gc, dt);
+		if(sprite!=null)
+			sprite.update(gc, dt);
+		if(tI!=null)
+			tI.update(gc, dt);
 		buttG.update(gc, dt);
 		if(buttG.isClicked())
 		{
@@ -70,9 +77,8 @@ public void setChoiceTwoScene(int choiceTwoScene) {
 	@Override
 	public void render(GameContainer gc, Renderer r) {
 		// TODO Auto-generated method stub
-		super.render(gc, r);
-	buttG.render(gc, r);
-		
+			super.render(gc, r);
+			buttG.render(gc, r);
 	}
 
 	public boolean isChoiceMade() {

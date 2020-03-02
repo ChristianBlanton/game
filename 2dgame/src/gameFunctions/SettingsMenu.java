@@ -19,8 +19,18 @@ public class SettingsMenu extends AbstractGame {
 	private Button subSfxVol;
 	private Button addTxtSpd;
 	private Button subTxtSpd;
+	private Button saveMenu;
 	private TextInputter tI;
 	private boolean goBack = false;
+	private boolean goSave=false;
+	public boolean isGoSave() {
+		return goSave;
+	}
+
+	public void setGoSave(boolean goSave) {
+		this.goSave = goSave;
+	}
+
 	private boolean musChange=false;
 
 	public boolean isMusChange() {
@@ -53,8 +63,34 @@ public class SettingsMenu extends AbstractGame {
 		objects.add(addTxtSpd);
 		objects.add(subTxtSpd);
 		tI=new TextInputter(500, 500, 100, 100);
-		objects.add(tI);
+		//objects.add(tI);
 		objects.add(new Dvd(100, 100, image));
+		saveMenu=new Button(600,600, 100,100, "Save");
+		objects.add(saveMenu);
+	}
+	
+	public SettingsMenu(Window window) {
+		back = new Button(10, 10, 40, 40, "<");
+		objects.add(back);
+		addMusVol=new Button(window.getSettings().getWidth()/6-200, window.getSettings().getHeight()/10, 200, 100, "MUSIC VOL+");
+		objects.add(addMusVol);
+		subMusVol=new Button(window.getSettings().getWidth()/6-200, window.getSettings().getHeight()/10+300, 200, 100, "MUSIC VOL-");
+		objects.add(subMusVol);
+		addSfxVol=new Button(window.getSettings().getWidth()/4,window.getSettings().getHeight()/10, 200, 100, "SFX VOL+");
+		objects.add(addSfxVol);
+		subSfxVol=new Button(window.getSettings().getWidth()/4, window.getSettings().getHeight()/10+300, 200, 100, "SFX VOL-");
+		objects.add(subSfxVol);
+		ImageTile image=new ImageTile("/dvdsprites.png",100,100);
+		
+		addTxtSpd=new Button(window.getSettings().getWidth()/2, window.getSettings().getHeight()/10, 200, 100, "Text Speed+");
+		subTxtSpd=new Button(window.getSettings().getWidth()/2, window.getSettings().getHeight()/10+300, 200, 100, "Text Speed-");
+		objects.add(addTxtSpd);
+		objects.add(subTxtSpd);
+		tI=new TextInputter(500, 500, 100, 100);
+		//objects.add(tI);
+		objects.add(new Dvd(100, 100, image));
+		saveMenu=new Button(600,600, 100,100, "Save");
+		objects.add(saveMenu);
 	}
 
 	@Override
@@ -116,6 +152,13 @@ public class SettingsMenu extends AbstractGame {
 				back.setClicked(false);
 				//destroy();
 			}
+			if(saveMenu.isClicked())
+			{
+				goSave=true;
+				saveMenu.setClicked(false);
+			}
+			
+			
 		}
 	}
 

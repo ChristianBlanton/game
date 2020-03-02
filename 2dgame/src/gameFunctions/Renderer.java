@@ -124,25 +124,41 @@ public class Renderer {
 	public void sideNoise(int chance) {
 
 		int occur = 0;
-		int randX = 0;
-		int randY = 0;
+		int randX = rand.nextInt(2) - rand.nextInt(2);
+		int randY = rand.nextInt(2) - rand.nextInt(2);
 		int pixelColor;
 
 		occur = rand.nextInt(1000);
 		if (occur > chance) {
-			for (int i = 0; i < pW; i++) {
-
-				for (int j = 0; j < pH; j++) {
-
-					//randY = rand.nextInt(1) - rand.nextInt(1);
-					//randX = rand.nextInt(5);
-
+			for (int i = 0; i < pW; i++)
+				for (int j = 0; j < pH; i++) {
 					pixelColor = pixels[i + j * pW];
-					setPixel(i + randX, j + randY, Pixel.mul(pixelColor, 2));
+					setPixel(i + randX, j + randY, pixelColor);
 				}
 
-			}
 		}
+	}
+
+	public void sideNoise(int chance, int row) {
+		int occur = 0;
+		int randX;
+		int randY;
+		int pixelColor;
+		occur = rand.nextInt(1000);
+		 if(occur>chance)
+		 {
+			 for (int i = pW; i > 0; i--) {
+					for (int j = row; j < row + 100; j++) {
+						if (row + 100 <= pH) {
+							randX = rand.nextInt(3);
+							randY = rand.nextInt(1) - rand.nextInt(1);
+							pixelColor = pixels[i + j * pW];
+							setPixel(i + randX, j + randY, pixelColor);
+						}
+
+					}
+				}
+		 }
 	}
 
 	public void sideNoiseScroll(int row) {
@@ -157,11 +173,30 @@ public class Renderer {
 			randX = rand.nextInt(5);
 
 			pixelColor = pixels[i + row * pW];
-			setPixel(i+10, row+1, pixelColor);
+			setPixel(i + 10, row + 1, pixelColor);
 		}
 
 	}
-	
+
+	public void sideNoiseScroll(int row, int amt) {
+
+		int randX;
+		int randY;
+		int pixelColor;
+
+		for (int i = 0; i < pW; i++) {
+			for (int j = row; j < row + amt; j++) {
+				randY = rand.nextInt(5) - rand.nextInt(5);
+				randX = rand.nextInt(5);
+
+				pixelColor = pixels[i + row * pW];
+				setPixel(i + 10, j + 1, pixelColor);
+			}
+
+		}
+
+	}
+
 	public void sideNoiseScrollWhite(int row) {
 
 		int randX = 0;
@@ -173,7 +208,6 @@ public class Renderer {
 		}
 
 	}
-
 
 	public void noiseShad() {
 
@@ -277,17 +311,17 @@ public class Renderer {
 
 		}
 	}
-	
+
 	public void noiseShearScroll(int row) {
 		int pixelColor;
 
 		for (int i = 0; i < pW; i++) {
-				pixelColor = pixels[i + row * pW];
-				setPixel(i + 2 * row, row, pixelColor);
-				// setPixel(i-j, j, pixelColor);
-			}
-
+			pixelColor = pixels[i + row * pW];
+			setPixel(i + 2 * row, row, pixelColor);
+			// setPixel(i-j, j, pixelColor);
 		}
+
+	}
 
 	public void setPixel(int x, int y, int value) {
 		if (x < 0 || x >= pW || y < 0 || y >= pH)
@@ -477,7 +511,8 @@ public class Renderer {
 				setPixel(x + offX, y + offY, color);
 		}
 	}
- public void drawTextInBox(int offX, int offY, int width, int height, int color, String text) {
+
+	public void drawTextInBox(int offX, int offY, int width, int height, int color, String text) {
 		if (offX < -width)
 			return;
 		if (offY < -height)
@@ -548,8 +583,6 @@ public class Renderer {
 			offset += font.getChar(unicode).getWidth();
 		}
 	}
- 
-	
 
 	public void drawTextInBox(int offX, int offY, int width, int height, int color, int count, String source) {
 		if (offX < -width)
@@ -560,53 +593,51 @@ public class Renderer {
 			return;
 		if (offY >= pH)
 			return;
-
 		drawFillRect(offX, offY, width, height, color);
 
 		int offset = 0;
 		int offset2 = 0;
-		int unicode=0;
+		int unicode = 0;
 		int offY2 = offY;
-		String source2="";
-		String[] words=source.split(" ");
-		int currWord=0;
+		String source2 = "";
+		String[] words = source.split(" ");
+		for (String str : words) {
+			// System.out.println(str);
+		}
+		int currWord = 0;
 		int numReturns = 0;
 		String[] spots = new String[4];
 
-		
 		for (int p = 0; p < words.length; p++) {
-			if(offset2+font.getStringWidth(words[p])>width)
-			{
-				offset2=0;
-				words[p]="*"+words[p];
-				//spots[numReturns]=words[p];
+			if (offset2 + font.getStringWidth(words[p]) > width) {
+				offset2 = 0;
+				words[p] = "*" + words[p];
+				// spots[numReturns]=words[p];
 				numReturns++;
 			}
-				else
-			offset2+=font.getStringWidth(words[p])+font.getChar(32).getWidth();
-		}	
-	for(String str:words)
-source2+=str+" ";
-	
+			offset2 += font.getStringWidth(words[p]) + font.getChar(32).getWidth();
+		}
+		for (String str : words) {
+			// System.out.println(str);
+			source2 += str + " ";
+		}
+
 		int numReturns2 = 0;
 		for (int i = 0; i < count; i++) {
 			unicode = source2.codePointAt(i);
-			if (unicode==42) {
+			if (unicode == 42) {
 				offset = 0;
 				count++;
 				offY2 += font.getHeight();
 				numReturns2++;
-			}
-			else
-			{
+			} else {
 				drawImage(font.getChar(unicode), offX + offset, offY2);
 				offset += font.getChar(unicode).getWidth();
 			}
-			
-			
+
 		}
 	}
-	
+
 	public int getzDepth() {
 		return zDepth;
 	}

@@ -2,15 +2,15 @@ package gameFunctions;
 
 public class PixSettings {
 
-	private String title = "Old Town Road";
+	private String title = "VCR";
 	private int width=1280;
 	private int height=720;
 	private float scale=1.0f;
 	private double updateCap=1.0/144.0; 
 	private boolean debug=true; 
 	private boolean lockFPS=false;
-	private float musicVol=0;
-	private float sfxVol=0;
+	private float musicVol=-13;
+	private float sfxVol=-42;
 	private float txtSpd=0.25f;
 
 	/*

@@ -8,7 +8,7 @@ import gfx.Pixel;
 
 public class ButtonGroup {
 	Button but1, but2, but3;
-	private boolean clicked;
+	protected boolean clicked;
 	public boolean isClicked() {
 		return clicked;
 	}
@@ -30,6 +30,13 @@ public class ButtonGroup {
 		but1 = new Button(440, 10, 200, 50, b1);
 		but2 = new Button(440, 160, 200, 50, b2);
 		but3 = new Button(440, 310, 200, 50, b3);
+	}
+	
+	public ButtonGroup(String b1, String b2, String b3, int posX1, int posX2, int posX3) {
+		// todo change values to window values
+		but1 = new Button(posX1, 10, 200, 50, b1);
+		but2 = new Button(posX2, 160, 200, 50, b2);
+		but3 = new Button(posX3, 310, 200, 50, b3);
 	}
 
 	public void update(GameContainer gc, float dt) {

@@ -1,5 +1,7 @@
 package gameObjects;
 
+import java.awt.event.MouseEvent;
+
 import gameFunctions.AbstractGame;
 import gameFunctions.GameContainer;
 import gameFunctions.Renderer;
@@ -93,14 +95,15 @@ public class Scene extends AbstractGame{
 	@Override
 	public void render(GameContainer gc, Renderer r) {
 		// TODO Auto-generated method stub
-		if(sprite!=null)
-		sprite.render(gc, r);
-		bg.render(gc, r);
-		dialog.render(gc, r);
-		if(tI!=null)
-		tI.render(gc, r);
-	
-		
+		if(!gc.getInput().isButton(MouseEvent.BUTTON3))
+		{
+			if(sprite!=null)
+				sprite.render(gc, r);
+				dialog.render(gc, r);
+				if(tI!=null)
+				tI.render(gc, r);
+		}
+				bg.render(gc, r);
 	}
 
 	public boolean isFinished() {

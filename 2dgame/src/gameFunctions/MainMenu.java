@@ -8,7 +8,9 @@ import gameObjects.Background;
 import gameObjects.Button;
 import gameObjects.GameObject;
 import gfx.ImageTile;
-
+import gfx.Pixel;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;    
 public class MainMenu extends AbstractGame {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ImageTile image;
@@ -17,7 +19,10 @@ public class MainMenu extends AbstractGame {
 	private ImageTile dvd;
 	private Button play;
 	private Button settings;
+	private float row=0;
+	private float row2=0;
 	private boolean goToPlay = false;
+
 	public void setGoToPlay(boolean goToPlay) {
 		this.goToPlay = goToPlay;
 	}
@@ -32,21 +37,29 @@ public class MainMenu extends AbstractGame {
 		return goToSettings;
 	}
 
-	public MainMenu() {
-		play = new Button(200, 200, 200, 200, "PLAY");
+	public MainMenu(Window window) {
+		play = new Button(window.getSettings().getWidth() / 4, window.getSettings().getHeight() / 4, 200, 100, "PLAY", 0xFF5D6D7E, 0xFF080611);
 		objects.add(play);
-		settings = new Button(200, 500, 200, 200, "SETTINGS");
+		settings = new Button(window.getSettings().getWidth() / 4, window.getSettings().getHeight() / 2, 200, 100,"SETTINGS", 0xFF5D6D7E, 0x805D6D7E);
 		objects.add(settings);
 		clip = new SoundClip("/song.wav");
 		clip.setVolume(-50);
-		//clip.loop();
-		goToPlay=false;
-		goToSettings=false;
+		// clip.loop();
+		goToPlay = false;
+		goToSettings = false;
 	}
 
 	@Override
 	public void update(GameContainer gc, float dt) {
 		// TODO Auto-generated method stub
+		if (row + 1.5 < gc.getWindow().getSettings().getHeight())
+			row += 1.5;
+		else
+			row = 0;
+		if (row2 + 0.5 < gc.getWindow().getSettings().getHeight())
+			row2 += 0.5;
+		else
+			row2 = 0;
 		clip.setVolume(gc.getWindow().getSettings().getMusicVol());
 		for (int i = 0; i < objects.size(); i++) {
 			objects.get(i).update(gc, dt);
@@ -58,11 +71,17 @@ public class MainMenu extends AbstractGame {
 			if (play.isClicked()) {
 				goToPlay = true;
 				play.setClicked(false);
-				//destroy();
-			} else if (settings.isClicked()) {
+			} else {
+				//goToPlay = false;
+			}
+
+			if (settings.isClicked())
+			{
 				goToSettings = true;
 				settings.setClicked(false);
-				//destroy();
+			}
+			else {
+				//goToSettings = false;
 			}
 
 		}
@@ -71,12 +90,20 @@ public class MainMenu extends AbstractGame {
 	@Override
 	public void render(GameContainer gc, Renderer r) {
 		// TODO Auto-generated method stub
+		
+		r.drawFillRect(gc.getWindow().getSettings().getWidth()/8, 0, (int)(gc.getWindow().getSettings().getWidth()*0.75), gc.getWindow().getSettings().getHeight(), Pixel.BLUE);
 		for (GameObject obj : objects) {
 			obj.render(gc, r);
 		}
-		//r.sideNoise(990);
-		//r.noiseShad();
-		//r.noiseShear();
+		r.sideNoise(800, (int)row);
+		  DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");  
+		   LocalDateTime now = LocalDateTime.now();  
+		   r.draw2DString(dtf.format(now), (int)(gc.getWindow().getSettings().getWidth()*0.60),(int)(gc.getWindow().getSettings().getHeight()/4), 2);  
+		   r.noiseShad();
+		   r.sideNoiseScroll((int)row2, 5);
+		   r.sideNoiseScrollWhite(gc.getWindow().getSettings().getHeight()-1);
+		  
+		// r.noiseShear();
 	}
 
 	public void destroy() {

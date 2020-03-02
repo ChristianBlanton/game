@@ -66,22 +66,23 @@ public class TextInputter extends Button {
 			}
 			
 		}
-		
+		else
+			endAnim="";
 		
 		
 		
 			
 
 		if (hover) {
-			this.color = Pixel.RED;
+			this.color1 = Pixel.RED;
 		} else
-			color = Pixel.GREEN;
+			color1 = Pixel.GREEN;
 	}
 
 public void render(GameContainer gc, Renderer r) {
 	// TODO Auto-generated method stub
 	//r.draw2DString(text, posX+200, posY+200, 0);
-	r.drawTextInBox(posX, posY, width, height, color, text+endAnim);
+	r.drawTextInBox(posX, posY, width, height, color1, text+endAnim);
 	if(focused)
 		r.drawRect(posX-1, posY-1, width+1, height+1, Pixel.WHITE);
 	//r.noiseGen();

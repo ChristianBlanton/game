@@ -40,7 +40,8 @@ public class SoundClip {
 	}
 
 	public void play() {
-
+		if(clip.isRunning())
+			return;
 		if (clip == null)
 			return;
 		stop();
@@ -53,11 +54,12 @@ public class SoundClip {
 		if (clip.isRunning()) {
 			clip.stop();
 		}
+		//System.out.println("here");
 
 	}
 
 	public void close() {
-		stop();
+		clip.stop();
 		clip.drain();
 		clip.close();
 	}

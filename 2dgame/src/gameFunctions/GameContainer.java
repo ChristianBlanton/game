@@ -17,7 +17,7 @@ public class GameContainer implements Runnable
     private Window window;
     private Renderer renderer;
     private Input input;
-    private AbstractGame game;
+    private GameManager gameManager;
     private PixSettings settings;
     private double passedTime;
     private static double globTime;
@@ -27,7 +27,6 @@ public class GameContainer implements Runnable
     public GameContainer(Window window)
     {
      this.window=window;
-     game=new GameManager();
     }
 
     public void start()
@@ -35,6 +34,7 @@ public class GameContainer implements Runnable
         renderer=new Renderer(window);
         input= new Input(window);
         settings=new PixSettings();
+        gameManager=new GameManager(window);
         thread=new Thread(this);
         thread.run();
     }
@@ -73,7 +73,7 @@ public class GameContainer implements Runnable
                 unprocessedTime-=settings.getUpdateCap();
                 render=true;
                 
-                game.update(this, (float)settings.getUpdateCap());
+                gameManager.update(this, (float)settings.getUpdateCap());
                 input.update();
                 
                 if(frameTime>=1.0)
@@ -90,7 +90,7 @@ public class GameContainer implements Runnable
             	
             	globTime=firstTime%10;
             	renderer.clear();
-                game.render(this, renderer);
+                gameManager.render(this, renderer);
                 renderer.process();
                 renderer.drawText("FPS:"+fps, 0, 0, 0, 0xff00ffff);
                 //renderer.drawText("Time:"+globTime, 0, 100, 0, 0xff00ffff);
@@ -138,6 +138,14 @@ public class GameContainer implements Runnable
 	  public Renderer getRenderer() {
 			return renderer;
 		}
+
+	public GameManager getGameManager() {
+		return gameManager;
+	}
+
+	public void setGameManager(GameManager gameManager) {
+		this.gameManager = gameManager;
+	}
 	  
 }
 
